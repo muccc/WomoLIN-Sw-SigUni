@@ -63,4 +63,15 @@ namespace siguni
    };
 
 
+   class CSignalGetSignals final
+      : public CSignalAddUnit<interface::ISignalGetSignals>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetSignals() = default;
+         ~CSignalGetSignals() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+   };
+
+
 }

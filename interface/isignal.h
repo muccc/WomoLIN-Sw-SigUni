@@ -40,6 +40,14 @@ namespace siguni::interface
 		 virtual void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion ) = 0;
 	};
 
+	class ISignalGetSignals
+	{
+	  public:
+		 virtual ~ISignalGetSignals() = default;
+		 virtual void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attVersion ) = 0;
+	};
+
+
 
 }
 

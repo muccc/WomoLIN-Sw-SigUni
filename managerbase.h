@@ -4,7 +4,9 @@
 
 #pragma once
 
-#include "interface/isignal.h"
+#include "unit.h"
+#include "hal.h"
+#include "signal.h"
 #include "protocol.h"
 
 #include <map>
@@ -23,10 +25,17 @@ namespace siguni
       protected:
          std::string                                         message;
          std::map<std::string_view, interface::ISignal*>     signalVector;
-
+         
       private:
          interface::IControlbus &            controlbus;
          CProtocol                           protocol;
+
+         // units
+         CHalUnitInputGetSignals    halUnitInputGetSignals;   
+         CUnitInput                 unitInputGetSignals{ halUnitInputGetSignals } ; 
+
+         // signals 
+         CSignalGetSignals          GetSignals { CSignalGetSignals() };
 
    };
 }
