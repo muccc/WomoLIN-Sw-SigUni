@@ -12,7 +12,12 @@ namespace siguni
    CManagerBase::CManagerBase( interface::IControlbus & attControlbus ) 
       : controlbus( attControlbus )
       , protocol( controlbus )
+      , halUnitInputGetSignals( signalVector )
    {
+
+      signalVector["GetSignals"] = &GetSignals;
+      GetSignals.AddUnit( &unitInputGetSignals );
+
    }
 
    void CManagerBase::DoWork()
