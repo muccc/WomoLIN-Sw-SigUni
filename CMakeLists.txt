@@ -17,6 +17,7 @@ add_library(${PRJ_NAME}
 
    unit
    signal
+   hal
    protocol
    managerbase
 
