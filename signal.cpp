@@ -30,6 +30,13 @@ namespace siguni
 	   }
   }
 
+   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetSignals( attKey, attValue );
+	   }
+  }
+
 
 
 }

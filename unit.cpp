@@ -9,6 +9,11 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
+   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue )
+   {
+      unitInput.Get( attValue ); 
+   }
+
    void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue )
    {
       unitOutput.Set( attValue ); 
@@ -30,8 +35,4 @@ namespace siguni
    {
       unitInput.Get( attValue );
    }
-
-
-
-
 }
