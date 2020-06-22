@@ -9,18 +9,27 @@
 namespace siguni::interface
 {
 
-	class IInputHwBoardVersion : public siguni::interface::IUnitInput
+   class IControlbus
+   {
+      public:
+         virtual ~IControlbus() = default;
+
+         virtual int WriteData( const std::string & attMessage ) = 0;
+         virtual int ReadData( std::string & attMessage ) = 0;
+   };
+
+	class IUnitInputGetHwBoardVersion : public siguni::interface::IUnitInput
 	{
 	  public:
-		 virtual ~IInputHwBoardVersion() = default;
+		 virtual ~IUnitInputGetHwBoardVersion() = default;
 
 		 void Get( std::string & attGetInput ) override = 0;
 	};
 
-	class IInputDriverVersion : public siguni::interface::IUnitInput
+	class IUnitInputGetDriverVersion : public siguni::interface::IUnitInput
 	{
 	  public:
-		 virtual ~IInputDriverVersion() = default;
+		 virtual ~IUnitInputGetDriverVersion() = default;
 
 		 void Get( std::string & attGetInput ) override = 0;
 	};
