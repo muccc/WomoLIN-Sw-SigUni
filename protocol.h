@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "interface/icontrolbus.h"
+#include "interface/ihw.h"
 
 namespace siguni
 {
