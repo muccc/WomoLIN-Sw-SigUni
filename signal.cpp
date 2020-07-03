@@ -7,6 +7,14 @@
 namespace siguni
 {
 
+
+   template<class T>
+   void CSignalAddUnit<T>::AddUnit( T* unit )
+   {
+	   units.push_back(unit);
+   }
+
+
    void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue )
    {
 

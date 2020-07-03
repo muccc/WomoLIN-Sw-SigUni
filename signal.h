@@ -23,13 +23,20 @@ namespace siguni
 	      std::vector<T*> units;
    };
 
+   template class CSignalAddUnit<interface::ISignalGetSignals>;
 
-   template<class T>
-   void CSignalAddUnit<T>::AddUnit( T* unit )
+   class CSignalGetSignals final
+      : public CSignalAddUnit<interface::ISignalGetSignals>
+      , public interface::ISignal
    {
-	   units.push_back(unit);
-   }
+      public:
+         CSignalGetSignals() = default;
+         ~CSignalGetSignals() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+   };
 
+
+   template class CSignalAddUnit<interface::ISignalSetReset>;
 
    class CSignalSetReset final
       : public CSignalAddUnit<interface::ISignalSetReset>
@@ -40,6 +47,9 @@ namespace siguni
          ~CSignalSetReset() = default;
          void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
    };
+
+
+   template class CSignalAddUnit<interface::ISignalGetVoltage>;
 
    class CSignalGetVoltage final
       : public CSignalAddUnit<interface::ISignalGetVoltage>
@@ -52,6 +62,8 @@ namespace siguni
    };
 
 
+   template class CSignalAddUnit<interface::ISignalGetVersion>;
+
    class CSignalGetVersion final
       : public CSignalAddUnit<interface::ISignalGetVersion>
       , public interface::ISignal
@@ -59,17 +71,6 @@ namespace siguni
       public:
          CSignalGetVersion() = default;
          ~CSignalGetVersion() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
-   };
-
-
-   class CSignalGetSignals final
-      : public CSignalAddUnit<interface::ISignalGetSignals>
-      , public interface::ISignal
-   {
-      public:
-         CSignalGetSignals() = default;
-         ~CSignalGetSignals() = default;
          void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
    };
 
