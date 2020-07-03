@@ -2,7 +2,8 @@
 /* Copyright (c) 2020 Project WomoLIN */
 /* Author Myron Franze <myronfranze@web.de> */
 
-#include "../signal.h"
+// for testing purposes, we add the cpp file instead of the header file
+#include "../signal.cpp"
 
 #include <gtest/gtest.h>
 
@@ -13,6 +14,70 @@ namespace siguni::gtest
 class CSerialTest  : public ::testing::Test { };
 
 
+// Test add unit
+class CSignalAddUnitIntTest : public CSignalAddUnit<int>
+{
+public:
+	CSignalAddUnitIntTest() { unitsPointer = &units ; } ;
+	~CSignalAddUnitIntTest() = default;
+	const std::vector<int*>* unitsPointer; // pointer to access unit array
+};
+
+TEST_F( CSerialTest, CSignalAddUnitInt ) {
+
+	int val1 {1};
+	int val2 {2};
+
+	auto test = CSignalAddUnitIntTest();
+
+	ASSERT_TRUE( (*test.unitsPointer).empty() ) << "no values added, array must be empty";
+	test.AddUnit( &val1 );
+	ASSERT_EQ( 1,  (*test.unitsPointer).size() ) << "added one value, array must be have one value";
+
+	test.AddUnit( &val2 ); // add second value to array
+
+	val1 = 10; // change initialize value from value 1
+	val2 = 20; // change initialize value from value 2
+
+	ASSERT_EQ( 10, *(*test.unitsPointer).at(0) ) << "value 1 must be 10, changed variable var1 changed";
+	ASSERT_EQ( 20, *(*test.unitsPointer).at(1) ) << "value 1 must be 20, changed variable var2 changed";
+
+}
+
+// Test Signal GetSignals
+class CSignalGetSignalsTest : public interface::ISignalGetSignals
+{
+public:
+	CSignalGetSignalsTest() = default ;
+	~CSignalGetSignalsTest() = default;
+	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue ) override final
+	{
+		key = attKey;
+		value = attValue;
+	};
+
+	std::string key { "" };
+	std::string value { "UNKNOWN" };
+
+};
+
+
+TEST_F( CSerialTest, ISignalGetSignals) {
+
+	std::string key { "KEY" };
+	std::string val { "GET" };
+
+	auto test = CSignalGetSignalsTest();
+
+	test.UpdateUnitSignalGetSignals( key, val );
+
+	ASSERT_STREQ( test.key.c_str() , "KEY" );
+	ASSERT_STREQ( test.value.c_str(), "GET" );
+
+}
+
+
+// Test Signal SetReset
 class CSignalSetResetTest : public interface::ISignalSetReset
 {
 public:
@@ -43,6 +108,7 @@ TEST_F( CSerialTest, ISignalSetReset ) {
 
 }
 
+// Test Signal GetVoltage
 class CSignalGetVoltageTest : public interface::ISignalGetVoltage
 {
 public:
@@ -73,6 +139,7 @@ TEST_F( CSerialTest, ISignalGetVoltage ) {
 }
 
 
+// Test Signal GetVersion
 class CSignalGetVersionTest : public interface::ISignalGetVersion
 {
 public:
@@ -102,37 +169,6 @@ TEST_F( CSerialTest, ISignalGetVersion ) {
 
 }
 
-
-
-
-class CSignalAddUnitIntTest : public CSignalAddUnit<int>
-{
-public:
-	CSignalAddUnitIntTest() { unitsPointer = &units ; } ;
-	~CSignalAddUnitIntTest() = default;
-	const std::vector<int*>* unitsPointer; // pointer to access unit array
-};
-
-TEST_F( CSerialTest, CSignalAddUnitInt ) {
-
-	int val1 {1};
-	int val2 {2};
-
-	auto test = CSignalAddUnitIntTest();
-
-	ASSERT_TRUE( (*test.unitsPointer).empty() ) << "no values added, array must be empty";
-	test.AddUnit( &val1 );
-	ASSERT_EQ( 1,  (*test.unitsPointer).size() ) << "added one value, array must be have one value";
-
-	test.AddUnit( &val2 ); // add second value to array
-
-	val1 = 10; // change initialize value from value 1
-	val2 = 20; // change initialize value from value 2
-
-	ASSERT_EQ( 10, *(*test.unitsPointer).at(0) ) << "value 1 must be 10, changed variable var1 changed";
-	ASSERT_EQ( 20, *(*test.unitsPointer).at(1) ) << "value 1 must be 20, changed variable var2 changed";
-
-}
 
 }
 
