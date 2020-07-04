@@ -50,7 +50,7 @@ class CSignalGetSignalsTest : public interface::ISignalGetSignals
 public:
 	CSignalGetSignalsTest() = default ;
 	~CSignalGetSignalsTest() = default;
-	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue ) override final
+	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, interface::CSystemSettings & /*attSystemSettings*/ ) override final
 	{
 		key = attKey;
 		value = attValue;
@@ -68,8 +68,9 @@ TEST_F( CSerialTest, ISignalGetSignals) {
 	std::string val { "GET" };
 
 	auto test = CSignalGetSignalsTest();
+   auto systemSettings = interface::CSystemSettings();
 
-	test.UpdateUnitSignalGetSignals( key, val );
+	test.UpdateUnitSignalGetSignals( key, val, systemSettings );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.value.c_str(), "GET" );
@@ -83,7 +84,7 @@ class CSignalSetResetTest : public interface::ISignalSetReset
 public:
 	CSignalSetResetTest() = default ;
 	~CSignalSetResetTest() = default;
-	void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue ) override final
+	void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CSystemSettings & /*attSystemSettings*/ ) override final
 	{
 		key = attKey;
 		value = attValue;
@@ -100,8 +101,9 @@ TEST_F( CSerialTest, ISignalSetReset ) {
 	std::string val { "GET" };
 
 	auto test = CSignalSetResetTest();
+   auto systemSettings = interface::CSystemSettings();
 
-	test.UpdateUnitSignalSetReset( key, val );
+	test.UpdateUnitSignalSetReset( key, val, systemSettings );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.value.c_str(), "GET" );
@@ -114,7 +116,7 @@ class CSignalGetVoltageTest : public interface::ISignalGetVoltage
 public:
 	CSignalGetVoltageTest() = default ;
 	~CSignalGetVoltageTest() = default;
-	void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage ) override final
+	void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage, interface::CSystemSettings & /*attSystemSettings*/ ) override final
 	{
 		key = attKey;
 		voltage = attGetVoltage;
@@ -130,8 +132,9 @@ TEST_F( CSerialTest, ISignalGetVoltage ) {
 	std::string voltage {"VOLTAGE"};
 
 	auto test = CSignalGetVoltageTest();
+   auto systemSettings = interface::CSystemSettings();
 
-	test.UpdateUnitSignalGetVoltage( key, voltage );
+	test.UpdateUnitSignalGetVoltage( key, voltage, systemSettings );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.voltage.c_str() , "VOLTAGE");
@@ -145,7 +148,7 @@ class CSignalGetVersionTest : public interface::ISignalGetVersion
 public:
 	CSignalGetVersionTest() = default ;
 	~CSignalGetVersionTest() = default;
-	void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion ) override final
+	void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, interface::CSystemSettings & /*attSystemSettings*/ ) override final
 	{
 		key = attKey;
 		fw = attVersion;
@@ -161,8 +164,9 @@ TEST_F( CSerialTest, ISignalGetVersion ) {
 	std::string fw {"FW"};
 
 	auto test = CSignalGetVersionTest();
+   auto systemSettings = interface::CSystemSettings();
 
-	test.UpdateUnitSignalGetVersion( key, fw );
+	test.UpdateUnitSignalGetVersion( key, fw, systemSettings );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.fw.c_str() , "FW");

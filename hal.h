@@ -16,10 +16,35 @@ namespace siguni
          CHalUnitInputGetSignals( const std::map<std::string_view, interface::ISignal*> & attSignalMap );
          ~CHalUnitInputGetSignals() = default;
 
-      void Get( std::string & attGetInput ) override final; 
+      void Get( std::string & attGetInput, interface::CSystemSettings & attSystemSettings ) override final; 
 
       private:
          const std::map<std::string_view, interface::ISignal*> & signalMap;
    };
+
+   class CHalUnitInputGetSimulationStatus: public interface::IUnitInput
+   {
+      public:
+         CHalUnitInputGetSimulationStatus( const std::map<std::string_view, interface::ISignal*> & attSignalMap );
+         ~CHalUnitInputGetSimulationStatus() = default;
+
+      void Get( std::string & attGetInput, interface::CSystemSettings & attSystemSettings ) override final; 
+
+      private:
+         const std::map<std::string_view, interface::ISignal*> & signalMap;
+   };
+
+   class CHalUnitOutputSetResetSimulationModus : public interface::IUnitOutput
+   {
+      public:
+         CHalUnitOutputSetResetSimulationModus( const std::map<std::string_view, interface::ISignal*> & attSignalMap );
+         ~CHalUnitOutputSetResetSimulationModus() = default;
+
+         void Set( std::string & attSetOutput, interface::CSystemSettings & attSystemSettings ) override final;
+
+      private:
+         const std::map<std::string_view, interface::ISignal*> & signalMap;
+   };
+
 
 }

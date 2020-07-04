@@ -17,7 +17,7 @@ namespace siguni
 	     CUnitOutput( interface::IUnitOutput & attUnitOutput) ;
          ~CUnitOutput() = default;
 
-         void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
 
       private:
          interface::IUnitOutput & unitOutput;
@@ -33,11 +33,11 @@ namespace siguni
 	     CUnitInput( interface::IUnitInput & attUnitInput) ;
          ~CUnitInput() = default;
 
-         void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
 
-         void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue ) override final;
-         void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attValue ) override final;
-         void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
+         void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings  ) override final;
+         void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings  ) override final;
 
       private:
          interface::IUnitInput & unitInput;

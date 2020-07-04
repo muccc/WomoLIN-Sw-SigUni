@@ -32,7 +32,7 @@ namespace siguni
       public:
          CSignalGetSignals() = default;
          ~CSignalGetSignals() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
    };
 
 
@@ -45,7 +45,7 @@ namespace siguni
       public:
 	   	CSignalSetReset() = default;
          ~CSignalSetReset() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
    };
 
 
@@ -58,7 +58,7 @@ namespace siguni
       public:
          CSignalGetVoltage() = default;
          ~CSignalGetVoltage() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
    };
 
 
@@ -71,7 +71,7 @@ namespace siguni
       public:
          CSignalGetVersion() = default;
          ~CSignalGetVersion() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings ) override final;
    };
 
 

@@ -9,30 +9,30 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
-   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
-      unitInput.Get( attValue ); 
+      unitInput.Get( attValue, attSystemSettings ); 
    }
 
-   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue )
+   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
-      unitOutput.Set( attValue ); 
+      unitOutput.Set( attValue, attSystemSettings ); 
    }
 
    CUnitInput::CUnitInput( interface::IUnitInput & attUnitInput ) : unitInput( attUnitInput ) {}
 
-   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attSystemSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attSystemSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attSystemSettings );
    }
 }

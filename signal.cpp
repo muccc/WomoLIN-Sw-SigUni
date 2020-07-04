@@ -14,34 +14,33 @@ namespace siguni
 	   units.push_back(unit);
    }
 
+   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attSystemSettings );
+	   }
+   }
 
-   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue )
+   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
 
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalSetReset( attKey, attValue );
+		   unit->UpdateUnitSignalSetReset( attKey, attValue, attSystemSettings );
 	   }
 
   }
 
-   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue )
+   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVersion( attKey, attValue );
+		   unit->UpdateUnitSignalGetVersion( attKey, attValue, attSystemSettings );
 	   }
   }
 
-   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue )
+   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue, interface::CSystemSettings & attSystemSettings )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVoltage( attKey, attValue );
-	   }
-  }
-
-   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue )
-   {
-	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetSignals( attKey, attValue );
+		   unit->UpdateUnitSignalGetVoltage( attKey, attValue, attSystemSettings );
 	   }
   }
 

@@ -23,7 +23,7 @@ namespace siguni::interface
 	  public:
 		 virtual ~IUnitInputGetHwBoardVersion() = default;
 
-		 void Get( std::string & attGetInput ) override = 0;
+		 void Get( std::string & attGetInput, interface::CSystemSettings & attSystemSettings ) override = 0;
 	};
 
 	class IUnitInputGetDriverVersion : public siguni::interface::IUnitInput
@@ -31,7 +31,7 @@ namespace siguni::interface
 	  public:
 		 virtual ~IUnitInputGetDriverVersion() = default;
 
-		 void Get( std::string & attGetInput ) override = 0;
+		 void Get( std::string & attGetInput, interface::CSystemSettings & attSystemSettings ) override = 0;
 	};
 
 }
