@@ -14,7 +14,7 @@ namespace siguni
 
    } 
 
-   void CHalUnitInputGetSignals::Get( std::string & attGetInput, std::map<std::string_view, std::string> & /*attSystemSettings*/ )
+   void CHalUnitInputGetSignals::Get( std::string & attGetInput, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ )
    {
       attGetInput.clear();
       for(const auto & [key, ignored]  : signalMap ){
@@ -30,9 +30,9 @@ namespace siguni
 
    } 
 
-   void CHalUnitInputGetSimulationStatus::Get( std::string & attGetInput, std::map<std::string_view, std::string> & attSystemSettings ) 
+   void CHalUnitInputGetSimulationStatus::Get( std::string & attGetInput, std::map<std::string_view, std::string> & attAdditionalSettings ) 
    {
-      attGetInput = attSystemSettings["SIMULATION_STATUS"];
+      attGetInput = attAdditionalSettings["SIMULATION_STATUS"];
    } 
 
    // Set Simulation Modus
@@ -43,9 +43,9 @@ namespace siguni
    } 
 
 
-   void CHalUnitOutputSetResetSimulationModus::Set( std::string & attSetOutput, std::map<std::string_view, std::string> & attSystemSettings  ) 
+   void CHalUnitOutputSetResetSimulationModus::Set( std::string & attSetOutput, std::map<std::string_view, std::string> & attAdditionalSettings  ) 
    {
-      attSystemSettings["SIMULATION_STATUS"] = attSetOutput;
+      attAdditionalSettings["SIMULATION_STATUS"] = attSetOutput;
    } 
 
 }

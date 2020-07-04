@@ -9,30 +9,30 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
-   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue, attSystemSettings ); 
+      unitInput.Get( attValue, attAdditionalSettings ); 
    }
 
-   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitOutput.Set( attValue, attSystemSettings ); 
+      unitOutput.Set( attValue, attAdditionalSettings ); 
    }
 
    CUnitInput::CUnitInput( interface::IUnitInput & attUnitInput ) : unitInput( attUnitInput ) {}
 
-   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue, attSystemSettings );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue, attSystemSettings );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue, attSystemSettings );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 }

@@ -14,33 +14,33 @@ namespace siguni
 	   units.push_back(unit);
    }
 
-   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attSystemSettings );
+		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attAdditionalSettings );
 	   }
    }
 
-   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
 
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalSetReset( attKey, attValue, attSystemSettings );
+		   unit->UpdateUnitSignalSetReset( attKey, attValue, attAdditionalSettings );
 	   }
 
   }
 
-   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVersion( attKey, attValue, attSystemSettings );
+		   unit->UpdateUnitSignalGetVersion( attKey, attValue, attAdditionalSettings );
 	   }
   }
 
-   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings )
+   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVoltage( attKey, attValue, attSystemSettings );
+		   unit->UpdateUnitSignalGetVoltage( attKey, attValue, attAdditionalSettings );
 	   }
   }
 
