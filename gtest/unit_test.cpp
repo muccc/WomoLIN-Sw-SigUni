@@ -18,7 +18,7 @@ public:
 	CUnitOutputTest() = default ;
 	~CUnitOutputTest() = default;
 
-    void Set( std::string & attSetOutput ) override final { setCommand = attSetOutput; };
+    void Set( std::string & attSetOutput, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final { setCommand = attSetOutput; };
 
     std::string setCommand;
 };
@@ -26,15 +26,16 @@ public:
 TEST_F( CUnitTest, IUnitOutput ) {
 
 	auto test = CUnitOutputTest();
+   std::map<std::string_view, std::string> additionalSettings;
 
    std::string setCommand { "SET" };
 
-	test.Set( setCommand );
+	test.Set( setCommand, additionalSettings );
 	ASSERT_STREQ( test.setCommand.c_str() , "SET" );
 
    setCommand = "RESET";
 
-	test.Set( setCommand );
+	test.Set( setCommand, additionalSettings );
 	ASSERT_STREQ( test.setCommand.c_str() , "RESET" );
 }
 
@@ -44,16 +45,17 @@ public:
 	CUnitInputTest() = default ;
 	~CUnitInputTest() = default;
 
-    void Get( std::string & attStatus ) override final {	attStatus = "SET"; };
+    void Get( std::string & attStatus, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final {	attStatus = "SET"; };
 };
 
 TEST_F( CUnitTest, IUnitInput ) {
 
 	auto test = CUnitInputTest();
+   std::map<std::string_view, std::string> additionalSettings;
 
 	std::string status_string {"UNKNOWN"};
 
-	test.Get( status_string );
+	test.Get( status_string, additionalSettings );
 	ASSERT_STREQ( status_string.c_str() , "SET" );
 }
 

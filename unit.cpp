@@ -9,30 +9,30 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
-   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue ); 
+      unitInput.Get( attValue, attAdditionalSettings ); 
    }
 
-   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue )
+   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitOutput.Set( attValue ); 
+      unitOutput.Set( attValue, attAdditionalSettings ); 
    }
 
    CUnitInput::CUnitInput( interface::IUnitInput & attUnitInput ) : unitInput( attUnitInput ) {}
 
-   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue )
+   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
    {
-      unitInput.Get( attValue );
+      unitInput.Get( attValue, attAdditionalSettings );
    }
 }

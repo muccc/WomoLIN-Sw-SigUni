@@ -13,10 +13,19 @@ namespace siguni
       : controlbus( attControlbus )
       , protocol( controlbus )
       , halUnitInputGetSignals( signalVector )
+      , halUnitInputGetSimulationStatus( signalVector )
+      , halUnitOutputSetResetSimulationModus( signalVector )
    {
+      additionalSettings.insert( std::pair<std::string_view, std::string>( "SIMULATION_STATUS", "RESET" ) );
 
       signalVector["GetSignals"] = &GetSignals;
       GetSignals.AddUnit( &unitInputGetSignals );
+
+      signalVector["GetSimulationStatus"] = &GetSimulationStatus;
+      GetSimulationStatus.AddUnit( &unitInputGetSimulationStatus );
+      
+      signalVector["SetResetSimulationModus"] = &SetResetSimulationModus;
+      SetResetSimulationModus.AddUnit( &unitOutputSetResetSimulationModus );
 
    }
 
@@ -33,7 +42,7 @@ namespace siguni
             if ( true == signalVector.count(key) ) {
 
                valueCopy = value;
-               signalVector.at(key)->UpdateUnit( key, value );
+               signalVector.at(key)->UpdateUnit( key, value, additionalSettings );
 
                if( 0 == valueCopy.compare( "GET" ) ) {
                   protocol.SendKeyValue( key, value );
