@@ -10,13 +10,13 @@ namespace siguni
 {
 
    CManagerBase::CManagerBase( interface::IControlbus & attControlbus ) 
-      : systemSettings( interface::CSystemSettings() ) 
-      , controlbus( attControlbus )
+      : controlbus( attControlbus )
       , protocol( controlbus )
       , halUnitInputGetSignals( signalVector )
       , halUnitInputGetSimulationStatus( signalVector )
       , halUnitOutputSetResetSimulationModus( signalVector )
    {
+      systemSettings.insert( std::pair<std::string_view, std::string>( "SIMULATION_STATUS", "RESET" ) );
 
       signalVector["GetSignals"] = &GetSignals;
       GetSignals.AddUnit( &unitInputGetSignals );

@@ -14,7 +14,7 @@ namespace siguni::interface
       public:
          virtual ~IUnitOutput() = default;
 
-         virtual void Set( std::string & attSetOutput, CSystemSettings & attSystemSettings ) = 0;
+         virtual void Set( std::string & attSetOutput, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
    };
 
    class IUnitInput
@@ -22,6 +22,6 @@ namespace siguni::interface
       public:
          virtual ~IUnitInput() = default;
 
-         virtual void Get( std::string & attGetOuput , CSystemSettings & attSystemSettings ) = 0;
+         virtual void Get( std::string & attGetOuput , std::map<std::string_view, std::string> & attSystemSettings ) = 0;
    };
 }

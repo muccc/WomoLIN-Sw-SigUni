@@ -17,7 +17,7 @@ class CSiguniTest  : public ::testing::Test { };
 
 class CUnitSignalSetReset : public interface::ISignalSetReset
 {
-	void UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & /*attValue*/, interface::CSystemSettings & /*attSystemSettings*/ ) override {};
+	void UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & /*attValue*/, std::map<std::string_view, std::string> & /*attSystemSettings*/ ) override {};
 };
 
 
@@ -27,7 +27,7 @@ public:
 	CRelayOutput() = default ;
 	~CRelayOutput() = default;
 
-    void Set( std::string & attSetOutput, interface::CSystemSettings & /*attSystemSettings*/ ) override final { set = attSetOutput; };
+    void Set( std::string & attSetOutput, std::map<std::string_view, std::string> & /*attSystemSettings*/ ) override final { set = attSetOutput; };
 
     std::string set;
 };
@@ -44,8 +44,7 @@ TEST_F( CSiguniTest, CUnitOutput ) {
 	std::string key {};
 	std::string val {};
 
-   auto systemSettings = interface::CSystemSettings();
-	signal_setReset_1.UpdateUnit( key, val, systemSettings );
+   std::map<std::string_view, std::string> systemSettings;
 
 	// TODO
 	//std::cout << key << std::endl;

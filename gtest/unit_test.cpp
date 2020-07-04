@@ -18,7 +18,7 @@ public:
 	CUnitOutputTest() = default ;
 	~CUnitOutputTest() = default;
 
-    void Set( std::string & attSetOutput, interface::CSystemSettings & /*attSystemSettings*/ ) override final { setCommand = attSetOutput; };
+    void Set( std::string & attSetOutput, std::map<std::string_view, std::string> & /*attSystemSettings*/ ) override final { setCommand = attSetOutput; };
 
     std::string setCommand;
 };
@@ -26,7 +26,7 @@ public:
 TEST_F( CUnitTest, IUnitOutput ) {
 
 	auto test = CUnitOutputTest();
-   auto systemSettings = interface::CSystemSettings();
+   std::map<std::string_view, std::string> systemSettings;
 
    std::string setCommand { "SET" };
 
@@ -45,13 +45,13 @@ public:
 	CUnitInputTest() = default ;
 	~CUnitInputTest() = default;
 
-    void Get( std::string & attStatus, interface::CSystemSettings & /*attSystemSettings*/ ) override final {	attStatus = "SET"; };
+    void Get( std::string & attStatus, std::map<std::string_view, std::string> & /*attSystemSettings*/ ) override final {	attStatus = "SET"; };
 };
 
 TEST_F( CUnitTest, IUnitInput ) {
 
 	auto test = CUnitInputTest();
-   auto systemSettings = interface::CSystemSettings();
+   std::map<std::string_view, std::string> systemSettings;
 
 	std::string status_string {"UNKNOWN"};
 

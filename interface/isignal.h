@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include "settings.h"
-
 #include <cinttypes>
 #include <string>
 #include <map>
@@ -18,38 +16,36 @@ namespace siguni::interface
 	{
 	  public:
 		 virtual ~ISignal() = default;
-		 virtual void UpdateUnit( std::string & attKey, std::string & attValue, CSystemSettings & attSystemSettings ) = 0;
+		 virtual void UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
 	};
 
 	class ISignalSetReset
 	{
 	  public:
 		 virtual ~ISignalSetReset() = default;
-		 virtual void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, CSystemSettings & attSystemSettings ) = 0;
+		 virtual void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
 	};
 
 	class ISignalGetVoltage
 	{
 	  public:
 		 virtual ~ISignalGetVoltage() = default;
-		 virtual void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage, CSystemSettings & attSystemSettings ) = 0;
+		 virtual void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
 	};
 
 	class ISignalGetVersion
 	{
 	  public:
 		 virtual ~ISignalGetVersion() = default;
-		 virtual void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, CSystemSettings & attSystemSettings ) = 0;
+		 virtual void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
 	};
 
 	class ISignalGetSignals
 	{
 	  public:
 		 virtual ~ISignalGetSignals() = default;
-		 virtual void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attVersion, CSystemSettings & attSystemSettings ) = 0;
+		 virtual void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attVersion, std::map<std::string_view, std::string> & attSystemSettings ) = 0;
 	};
-
-
 
 }
 

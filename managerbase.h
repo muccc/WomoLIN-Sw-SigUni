@@ -23,7 +23,7 @@ namespace siguni
          void DoWork();
 
       protected:
-         interface::CSystemSettings                          systemSettings; 
+         std::map<std::string_view, std::string>             systemSettings; 
          std::string                                         message;
          std::map<std::string_view, interface::ISignal*>     signalVector;
          
