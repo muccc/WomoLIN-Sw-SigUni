@@ -31,6 +31,7 @@ TEST_F( CSerialTest, CSignalAddUnitInt ) {
 	auto test = CSignalAddUnitIntTest();
 
 	ASSERT_TRUE( (*test.unitsPointer).empty() ) << "no values added, array must be empty";
+
 	test.AddUnit( &val1 );
 	ASSERT_EQ( 1,  (*test.unitsPointer).size() ) << "added one value, array must be have one value";
 
@@ -40,11 +41,11 @@ TEST_F( CSerialTest, CSignalAddUnitInt ) {
 	val2 = 20; // change initialize value from value 2
 
 	ASSERT_EQ( 10, *(*test.unitsPointer).at(0) ) << "value 1 must be 10, changed variable var1 changed";
-	ASSERT_EQ( 20, *(*test.unitsPointer).at(1) ) << "value 1 must be 20, changed variable var2 changed";
+	ASSERT_EQ( 20, *(*test.unitsPointer).at(1) ) << "value 2 must be 20, changed variable var2 changed";
 
 }
 
-// Test Signal GetSignals
+// Test Signal GetString
 class CSignalGetSignalsTest : public interface::ISignalGetString
 {
 public:
@@ -62,7 +63,7 @@ public:
 };
 
 
-TEST_F( CSerialTest, ISignalGetSignals) {
+TEST_F( CSerialTest, ISignalGetString) {
 
 	std::string key { "KEY" };
 	std::string val { "GET" };

@@ -8,19 +8,21 @@ namespace siguni
 {
 
    // Get Signals
-   CHalUnitInputGetSignals::CHalUnitInputGetSignals( const std::map<std::string_view, interface::ISignal*> & attSignalMap )
+   CHalUnitInputGetSignals::CHalUnitInputGetSignals ( const std::map<std::string_view, interface::ISignal*> & attSignalMap )
       : signalMap( attSignalMap )
    {
 
    } 
 
-   void CHalUnitInputGetSignals::Get( std::string & attGetInput, interface::CAdditionals & /*attAdditionals*/ )
+   void CHalUnitInputGetSignals::Get( std::string & attGetInput, 
+                                      interface::CAdditionals & /*attAdditionals*/ )
    {
       attGetInput.clear();
       for(const auto & [key, ignored]  : signalMap ){
          attGetInput.append( key ); 
          attGetInput.append( "," ); 
       }
+      attGetInput.pop_back(); // delete last character ","
    }
    
    // Get Simulation Status 
@@ -32,7 +34,7 @@ namespace siguni
 
    void CHalUnitInputGetSimulationStatus::Get( std::string & attGetInput, interface::CAdditionals & attAdditionals ) 
    {
-      if( attAdditionals.SimulationActive ) {
+      if( attAdditionals.SimulationMode ) {
          attGetInput = "SET"; 
       }
       else {
@@ -50,14 +52,16 @@ namespace siguni
 
    void CHalUnitOutputSetResetSimulationModus::Set( std::string & attSetOutput, interface::CAdditionals & attAdditionals  ) 
    {
-      if ( attSetOutput.compare("SET") ) {
-         attAdditionals.SimulationActive = true;
+      if ( attSetOutput.compare("SET") == 0 ) {
+         attAdditionals.SimulationMode = true;
       }
-      else if ( attSetOutput.compare("RESET") ) {
-         attAdditionals.SimulationActive = false;
+      else if ( attSetOutput.compare("RESET") == 0 ) {
+         attAdditionals.SimulationMode = false;
       }
       else {
-         attAdditionals.writeLog( "ERROR | CHalUnitOutputSetResetSimulationModus::Set | UNKNOWN attSetOutput: " + attSetOutput );
+         attAdditionals.WriteErrorLog( 
+            "CHalUnitOutputSetResetSimulationModus::Set",  
+            "unknown attSetOutput: " + attSetOutput );
       }
    } 
 
@@ -70,7 +74,7 @@ namespace siguni
 
    void CHalUnitInputGetLogging::Get( std::string & attGetInput, interface::CAdditionals & attAdditionals )
    {
-      attGetInput = attAdditionals.readLog();
+      attGetInput = attAdditionals.ReadErrorLog();
    }
  
 

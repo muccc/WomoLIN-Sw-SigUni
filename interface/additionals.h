@@ -18,14 +18,23 @@ namespace siguni::interface
        CAdditionals() = default;
 		 ~CAdditionals() = default;
 
-       bool SimulationActive { false };      
-       void writeLog( std::string attLogMsg ) { lastLog = attLogMsg; } ;
-       std::string readLog() { return lastLog; } ;
+       bool SimulationMode { false };      
+
+       void WriteErrorLog( std::string attIdentifier, std::string attErrorLog ) 
+       { 
+         errorLog.clear();
+         errorLog[attIdentifier] = attErrorLog; 
+       };
+
+       std::string ReadErrorLog() 
+       {
+         return errorLog.begin()->first + " ==> " + errorLog.begin()->second ; 
+       };
 
 		 std::map<std::string_view, std::string> Settings;
 
     private:
-      std::string lastLog;
+      std::map<std::string, std::string> errorLog;
 	};
 
 }

@@ -5,6 +5,7 @@ add_executable( ${LIB_NAME}
 	test.cpp
 	signal_test.cpp
 	unit_test.cpp
+   hal_test.cpp
 	siguni_test.cpp
 )
 

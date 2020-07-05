@@ -18,7 +18,7 @@ namespace siguni
       , halUnitInputGetLogging( signalVector )
    {
      
-      additionals.SimulationActive = false; 
+      additionals.SimulationMode = false; 
 
       //additionals.Settings.insert( std::pair<std::string_view, std::string>( "KEY", "VALUE" ) );
 

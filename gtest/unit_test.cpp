@@ -12,13 +12,18 @@ namespace siguni::gtest
 class CUnitTest  : public ::testing::Test { };
 
 
+// unit output
 class CUnitOutputTest : public interface::IUnitOutput
 {
 public:
 	CUnitOutputTest() = default ;
 	~CUnitOutputTest() = default;
 
-    void Set( std::string & attSetOutput, interface::CAdditionals & /*attAdditionals*/ ) override final { setCommand = attSetOutput; };
+    void Set( std::string & attSetOutput, 
+              interface::CAdditionals & /*attAdditionals*/ ) override final 
+            { 
+               setCommand = attSetOutput; 
+            };
 
     std::string setCommand;
 };
@@ -39,13 +44,18 @@ TEST_F( CUnitTest, IUnitOutput ) {
 	ASSERT_STREQ( test.setCommand.c_str() , "RESET" );
 }
 
+// unit intput
 class CUnitInputTest : public interface::IUnitInput
 {
 public:
 	CUnitInputTest() = default ;
 	~CUnitInputTest() = default;
 
-    void Get( std::string & attStatus, interface::CAdditionals & /*attAdditionals*/ ) override final {	attStatus = "SET"; };
+    void Get( std::string & attStatus, 
+              interface::CAdditionals & /*attAdditionals*/ ) override final 
+            {	
+               attStatus = "SET"; 
+            };
 };
 
 TEST_F( CUnitTest, IUnitInput ) {

@@ -1,0 +1,103 @@
+/* SPDX-License-Identifier: GPLv3-or-later */
+/* Copyright (c) 2020 Project WomoLIN */
+/* Author Myron Franze <myronfranze@web.de> */
+
+#include "../hal.h"
+#include "../signal.h"
+
+#include <gtest/gtest.h>
+
+namespace siguni::gtest
+{
+
+class CHalTest  : public ::testing::Test { };
+
+
+TEST_F( CHalTest, CHalUnitInputGetSignals ) {
+   
+   // preparations
+   std::map<std::string_view, interface::ISignal*> signalmap;
+   auto signal = CSignalGetString();
+
+   auto additionals = interface::CAdditionals();
+   std::string inputResult {};
+   
+   // empty list
+   auto test = CHalUnitInputGetSignals( signalmap );
+   test.Get( inputResult, additionals ); // readout signal list
+	ASSERT_STREQ( inputResult.c_str() , "" ) << "no signals added, result list must be empty" ;
+
+   // one signal
+   signalmap["TEST"] = &signal; // add a signal called TEST, reference to signal
+   test.Get( inputResult, additionals ); // readout signal list
+	ASSERT_STREQ( inputResult.c_str() , "TEST" ) << "result list must contains one signal called TEST" ;
+
+   // two signals
+   signalmap["TEST1"] = &signal; // add a signal called TEST, reference to signal
+   test.Get( inputResult, additionals ); // readout signal list
+	ASSERT_STREQ( inputResult.c_str() , "TEST,TEST1" ) << "result list must contains two signals called TEST and TEST1" ;
+}
+
+TEST_F( CHalTest, CHalUnitInputGetSimulationsStatus ) {
+   
+   // preparations
+   std::map<std::string_view, interface::ISignal*> signalmap;
+   auto signal = CSignalSetReset();
+
+   auto additionals = interface::CAdditionals();
+   std::string inputResult {};
+   
+   auto test = CHalUnitInputGetSimulationStatus( signalmap );
+
+   // default setting for simulation 
+   test.Get( inputResult, additionals ); // readout simulation status 
+	ASSERT_STREQ( inputResult.c_str() , "RESET" ) << "initialized value must be RESET" ;
+
+   // change to 
+   additionals.SimulationMode = true;
+   test.Get( inputResult, additionals ); // readout simulation status 
+	ASSERT_STREQ( inputResult.c_str() , "SET" ) << "simulationActiv is true, result must be SET" ;
+
+}
+
+TEST_F( CHalTest, CHalUnitOutputSetResetSimulationModus ) {
+   
+   // preparations
+   std::map<std::string_view, interface::ISignal*> signalmap;
+   auto signal = CSignalSetReset();
+
+   auto additionals = interface::CAdditionals();
+   std::string setResetCommand;
+   
+   auto test = CHalUnitOutputSetResetSimulationModus( signalmap );
+
+   // begin test
+   // set
+   setResetCommand = "SET";
+   test.Set( setResetCommand, additionals );
+   ASSERT_EQ( additionals.SimulationMode, true ) << "SET must set additionals.SimulationMode to true";   
+
+   // invalid command, state must be previous value 
+   // error logging must executed 
+   setResetCommand = "NOT_SET_OR_RESET";
+   test.Set( setResetCommand, additionals );
+   ASSERT_EQ( additionals.SimulationMode, true ) << "invalid command => previous command was SET";   
+	ASSERT_STREQ( additionals.ReadErrorLog().c_str() , 
+                 "CHalUnitOutputSetResetSimulationModus::Set ==> unknown attSetOutput: NOT_SET_OR_RESET" );
+
+   // reset
+   setResetCommand = "RESET";
+   test.Set( setResetCommand, additionals );
+   ASSERT_EQ( additionals.SimulationMode, false ) << "RESET must set additionals.SimulationMode to false";   
+
+   // invalid command, state must be previous value 
+   // error logging must executed 
+   setResetCommand = "INVALID_SET_RESET";
+   test.Set( setResetCommand, additionals );
+   ASSERT_EQ( additionals.SimulationMode, false ) << "invalid command ==> previous command was RESET";   
+	ASSERT_STREQ( additionals.ReadErrorLog().c_str() , 
+                 "CHalUnitOutputSetResetSimulationModus::Set ==> unknown attSetOutput: INVALID_SET_RESET" );
+}
+
+
+}
