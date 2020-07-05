@@ -24,7 +24,7 @@ namespace siguni
    };
 
    class CUnitInput
-      : public interface::ISignalGetSignals
+      : public interface::ISignalGetString
       , public interface::ISignalSetReset
       , public interface::ISignalGetVersion
       , public interface::ISignalGetVoltage
@@ -33,7 +33,7 @@ namespace siguni
 	     CUnitInput( interface::IUnitInput & attUnitInput) ;
          ~CUnitInput() = default;
 
-         void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+         void UpdateUnitSignalGetString( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
 
          void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
          void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;

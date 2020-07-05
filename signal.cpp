@@ -14,10 +14,10 @@ namespace siguni
 	   units.push_back(unit);
    }
 
-   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   void CSignalGetString::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attAdditionals );
+		   unit->UpdateUnitSignalGetString( attKey, attValue, attAdditionals );
 	   }
    }
 

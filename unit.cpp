@@ -9,7 +9,7 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
-   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
+   void CUnitInput::UpdateUnitSignalGetString( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
       unitInput.Get( attValue, attAdditionals ); 
    }

@@ -45,12 +45,12 @@ TEST_F( CSerialTest, CSignalAddUnitInt ) {
 }
 
 // Test Signal GetSignals
-class CSignalGetSignalsTest : public interface::ISignalGetSignals
+class CSignalGetSignalsTest : public interface::ISignalGetString
 {
 public:
 	CSignalGetSignalsTest() = default ;
 	~CSignalGetSignalsTest() = default;
-	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, interface::CAdditionals & /*attAdditionals*/ ) override final
+	void UpdateUnitSignalGetString( std::string & attKey, std::string & attValue, interface::CAdditionals & /*attAdditionals*/ ) override final
 	{
 		key = attKey;
 		value = attValue;
@@ -70,7 +70,7 @@ TEST_F( CSerialTest, ISignalGetSignals) {
 	auto test = CSignalGetSignalsTest();
    auto additionals = interface::CAdditionals();
 
-	test.UpdateUnitSignalGetSignals( key, val, additionals );
+	test.UpdateUnitSignalGetString( key, val, additionals );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.value.c_str(), "GET" );

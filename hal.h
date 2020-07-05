@@ -46,5 +46,15 @@ namespace siguni
          const std::map<std::string_view, interface::ISignal*> & signalMap;
    };
 
+   class CHalUnitInputGetLogging : public interface::IUnitInput
+   {
+      public:
+         CHalUnitInputGetLogging( const std::map<std::string_view, interface::ISignal*> & attSignalMap );
+         ~CHalUnitInputGetLogging() = default;
 
+      void Get( std::string & attGetInput, interface::CAdditionals & attAdditionals ) override final; 
+
+      private:
+         const std::map<std::string_view, interface::ISignal*> & signalMap;
+   };
 }

@@ -15,10 +15,10 @@ endif()
 
 add_library(${PRJ_NAME}
 
-   unit
-   signal
-   hal
-   protocol
-   managerbase
+   unit.cpp
+   signal.cpp
+   hal.cpp
+   protocol.cpp
+   managerbase.cpp
 
 )

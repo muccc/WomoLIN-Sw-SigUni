@@ -17,8 +17,15 @@ namespace siguni::interface
 	  public:
        CAdditionals() = default;
 		 ~CAdditionals() = default;
-      
+
+       bool SimulationActive { false };      
+       void writeLog( std::string attLogMsg ) { lastLog = attLogMsg; } ;
+       std::string readLog() { return lastLog; } ;
+
 		 std::map<std::string_view, std::string> Settings;
+
+    private:
+      std::string lastLog;
 	};
 
 }

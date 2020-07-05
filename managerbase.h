@@ -23,7 +23,7 @@ namespace siguni
          void DoWork();
 
       protected:
-         interface::CAdditionals                              additionals; 
+         interface::CAdditionals                             additionals; 
          std::string                                         message;
          std::map<std::string_view, interface::ISignal*>     signalVector;
          
@@ -31,22 +31,29 @@ namespace siguni
          interface::IControlbus &                  controlbus;
          CProtocol                                 protocol;
 
-         // units
+         // get signals
          CHalUnitInputGetSignals                   halUnitInputGetSignals;   
          CUnitInput                                unitInputGetSignals{ halUnitInputGetSignals } ; 
 
+         // get simulation status
          CHalUnitInputGetSimulationStatus          halUnitInputGetSimulationStatus;   
          CUnitInput                                unitInputGetSimulationStatus{ halUnitInputGetSimulationStatus } ; 
 
+         // set/reset simulation mode
          CHalUnitOutputSetResetSimulationModus     halUnitOutputSetResetSimulationModus;   
          CUnitOutput                               unitOutputSetResetSimulationModus{ halUnitOutputSetResetSimulationModus } ; 
 
+         // get logging 
+         CHalUnitInputGetLogging                   halUnitInputGetLogging;   
+         CUnitInput                                unitInputGetLogging{ halUnitInputGetLogging } ; 
 
          // signals 
-         CSignalGetSignals                         GetSignals { CSignalGetSignals() };
-         CSignalSetReset                           GetSimulationStatus { CSignalSetReset() };
+         CSignalGetString                          GetSignals { CSignalGetString() };
 
+         CSignalSetReset                           GetSimulationStatus { CSignalSetReset() };
          CSignalSetReset                           SetResetSimulationModus{ CSignalSetReset() };
+
+         CSignalGetString                          GetLogging{ CSignalGetString() };
 
    };
 }

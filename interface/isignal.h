@@ -37,11 +37,11 @@ namespace siguni::interface
 		 virtual void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
 	};
 
-	class ISignalGetSignals
+	class ISignalGetString
 	{
 	  public:
-		 virtual ~ISignalGetSignals() = default;
-		 virtual void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
+		 virtual ~ISignalGetString() = default;
+		 virtual void UpdateUnitSignalGetString( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
 	};
 
 }

@@ -23,15 +23,15 @@ namespace siguni
 	      std::vector<T*> units;
    };
 
-   template class CSignalAddUnit<interface::ISignalGetSignals>;
+   template class CSignalAddUnit<interface::ISignalGetString>;
 
-   class CSignalGetSignals final
-      : public CSignalAddUnit<interface::ISignalGetSignals>
+   class CSignalGetString final
+      : public CSignalAddUnit<interface::ISignalGetString>
       , public interface::ISignal
    {
       public:
-         CSignalGetSignals() = default;
-         ~CSignalGetSignals() = default;
+         CSignalGetString() = default;
+         ~CSignalGetString() = default;
          void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 

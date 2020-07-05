@@ -15,8 +15,12 @@ namespace siguni
       , halUnitInputGetSignals( signalVector )
       , halUnitInputGetSimulationStatus( signalVector )
       , halUnitOutputSetResetSimulationModus( signalVector )
+      , halUnitInputGetLogging( signalVector )
    {
-      additionals.Settings.insert( std::pair<std::string_view, std::string>( "SIMULATION_STATUS", "RESET" ) );
+     
+      additionals.SimulationActive = false; 
+
+      //additionals.Settings.insert( std::pair<std::string_view, std::string>( "KEY", "VALUE" ) );
 
       signalVector["GetSignals"] = &GetSignals;
       GetSignals.AddUnit( &unitInputGetSignals );
@@ -26,6 +30,9 @@ namespace siguni
       
       signalVector["SetResetSimulationModus"] = &SetResetSimulationModus;
       SetResetSimulationModus.AddUnit( &unitOutputSetResetSimulationModus );
+
+      signalVector["GetLogging"] = &GetLogging;
+      GetLogging.AddUnit( &unitInputGetLogging );
 
    }
 
