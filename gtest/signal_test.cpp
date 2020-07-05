@@ -50,7 +50,7 @@ class CSignalGetSignalsTest : public interface::ISignalGetSignals
 public:
 	CSignalGetSignalsTest() = default ;
 	~CSignalGetSignalsTest() = default;
-	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final
+	void UpdateUnitSignalGetSignals( std::string & attKey, std::string & attValue, interface::CAdditionals & /*attAdditionals*/ ) override final
 	{
 		key = attKey;
 		value = attValue;
@@ -68,9 +68,9 @@ TEST_F( CSerialTest, ISignalGetSignals) {
 	std::string val { "GET" };
 
 	auto test = CSignalGetSignalsTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
-	test.UpdateUnitSignalGetSignals( key, val, additionalSettings );
+	test.UpdateUnitSignalGetSignals( key, val, additionals );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.value.c_str(), "GET" );
@@ -84,7 +84,7 @@ class CSignalSetResetTest : public interface::ISignalSetReset
 public:
 	CSignalSetResetTest() = default ;
 	~CSignalSetResetTest() = default;
-	void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final
+	void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CAdditionals & /*attAdditionals*/ ) override final
 	{
 		key = attKey;
 		value = attValue;
@@ -101,9 +101,9 @@ TEST_F( CSerialTest, ISignalSetReset ) {
 	std::string val { "GET" };
 
 	auto test = CSignalSetResetTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
-	test.UpdateUnitSignalSetReset( key, val, additionalSettings );
+	test.UpdateUnitSignalSetReset( key, val, additionals );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.value.c_str(), "GET" );
@@ -116,7 +116,7 @@ class CSignalGetVoltageTest : public interface::ISignalGetVoltage
 public:
 	CSignalGetVoltageTest() = default ;
 	~CSignalGetVoltageTest() = default;
-	void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final
+	void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attGetVoltage, interface::CAdditionals & /*attAdditionals*/ ) override final
 	{
 		key = attKey;
 		voltage = attGetVoltage;
@@ -132,9 +132,9 @@ TEST_F( CSerialTest, ISignalGetVoltage ) {
 	std::string voltage {"VOLTAGE"};
 
 	auto test = CSignalGetVoltageTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
-	test.UpdateUnitSignalGetVoltage( key, voltage, additionalSettings );
+	test.UpdateUnitSignalGetVoltage( key, voltage, additionals );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.voltage.c_str() , "VOLTAGE");
@@ -148,7 +148,7 @@ class CSignalGetVersionTest : public interface::ISignalGetVersion
 public:
 	CSignalGetVersionTest() = default ;
 	~CSignalGetVersionTest() = default;
-	void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final
+	void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, interface::CAdditionals & /*attAdditionals*/ ) override final
 	{
 		key = attKey;
 		fw = attVersion;
@@ -164,9 +164,9 @@ TEST_F( CSerialTest, ISignalGetVersion ) {
 	std::string fw {"FW"};
 
 	auto test = CSignalGetVersionTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
-	test.UpdateUnitSignalGetVersion( key, fw, additionalSettings );
+	test.UpdateUnitSignalGetVersion( key, fw, additionals );
 
 	ASSERT_STREQ( test.key.c_str() , "KEY" );
 	ASSERT_STREQ( test.fw.c_str() , "FW");

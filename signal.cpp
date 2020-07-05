@@ -14,33 +14,33 @@ namespace siguni
 	   units.push_back(unit);
    }
 
-   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CSignalGetSignals::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attAdditionalSettings );
+		   unit->UpdateUnitSignalGetSignals( attKey, attValue, attAdditionals );
 	   }
    }
 
-   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CSignalSetReset::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
 
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalSetReset( attKey, attValue, attAdditionalSettings );
+		   unit->UpdateUnitSignalSetReset( attKey, attValue, attAdditionals );
 	   }
 
   }
 
-   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CSignalGetVersion::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVersion( attKey, attValue, attAdditionalSettings );
+		   unit->UpdateUnitSignalGetVersion( attKey, attValue, attAdditionals );
 	   }
   }
 
-   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CSignalGetVoltage::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
 	   for( const auto & unit : units ){
-		   unit->UpdateUnitSignalGetVoltage( attKey, attValue, attAdditionalSettings );
+		   unit->UpdateUnitSignalGetVoltage( attKey, attValue, attAdditionals );
 	   }
   }
 

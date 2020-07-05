@@ -32,7 +32,7 @@ namespace siguni
       public:
          CSignalGetSignals() = default;
          ~CSignalGetSignals() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
 
@@ -45,7 +45,7 @@ namespace siguni
       public:
 	   	CSignalSetReset() = default;
          ~CSignalSetReset() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
 
@@ -58,7 +58,7 @@ namespace siguni
       public:
          CSignalGetVoltage() = default;
          ~CSignalGetVoltage() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
 
@@ -71,7 +71,7 @@ namespace siguni
       public:
          CSignalGetVersion() = default;
          ~CSignalGetVersion() = default;
-         void UpdateUnit( std::string & attKey, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings ) override final;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
 
