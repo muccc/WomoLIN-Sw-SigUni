@@ -18,7 +18,7 @@ public:
 	CUnitOutputTest() = default ;
 	~CUnitOutputTest() = default;
 
-    void Set( std::string & attSetOutput, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final { setCommand = attSetOutput; };
+    void Set( std::string & attSetOutput, interface::CAdditionals & /*attAdditionals*/ ) override final { setCommand = attSetOutput; };
 
     std::string setCommand;
 };
@@ -26,16 +26,16 @@ public:
 TEST_F( CUnitTest, IUnitOutput ) {
 
 	auto test = CUnitOutputTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
    std::string setCommand { "SET" };
 
-	test.Set( setCommand, additionalSettings );
+	test.Set( setCommand, additionals );
 	ASSERT_STREQ( test.setCommand.c_str() , "SET" );
 
    setCommand = "RESET";
 
-	test.Set( setCommand, additionalSettings );
+	test.Set( setCommand, additionals );
 	ASSERT_STREQ( test.setCommand.c_str() , "RESET" );
 }
 
@@ -45,17 +45,17 @@ public:
 	CUnitInputTest() = default ;
 	~CUnitInputTest() = default;
 
-    void Get( std::string & attStatus, std::map<std::string_view, std::string> & /*attAdditionalSettings*/ ) override final {	attStatus = "SET"; };
+    void Get( std::string & attStatus, interface::CAdditionals & /*attAdditionals*/ ) override final {	attStatus = "SET"; };
 };
 
 TEST_F( CUnitTest, IUnitInput ) {
 
 	auto test = CUnitInputTest();
-   std::map<std::string_view, std::string> additionalSettings;
+   auto additionals = interface::CAdditionals();
 
 	std::string status_string {"UNKNOWN"};
 
-	test.Get( status_string, additionalSettings );
+	test.Get( status_string, additionals );
 	ASSERT_STREQ( status_string.c_str() , "SET" );
 }
 

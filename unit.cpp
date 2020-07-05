@@ -9,30 +9,30 @@ namespace siguni
 
    CUnitOutput::CUnitOutput( interface::IUnitOutput & attUnitOutput ) : unitOutput( attUnitOutput ) {}
 
-   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CUnitInput::UpdateUnitSignalGetSignals( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
-      unitInput.Get( attValue, attAdditionalSettings ); 
+      unitInput.Get( attValue, attAdditionals ); 
    }
 
-   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CUnitOutput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
-      unitOutput.Set( attValue, attAdditionalSettings ); 
+      unitOutput.Set( attValue, attAdditionals ); 
    }
 
    CUnitInput::CUnitInput( interface::IUnitInput & attUnitInput ) : unitInput( attUnitInput ) {}
 
-   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CUnitInput::UpdateUnitSignalSetReset( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
-      unitInput.Get( attValue, attAdditionalSettings );
+      unitInput.Get( attValue, attAdditionals );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CUnitInput::UpdateUnitSignalGetVersion( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
-      unitInput.Get( attValue, attAdditionalSettings );
+      unitInput.Get( attValue, attAdditionals );
    }
 
-   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, std::map<std::string_view, std::string> & attAdditionalSettings )
+   void CUnitInput::UpdateUnitSignalGetVoltage( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
    {
-      unitInput.Get( attValue, attAdditionalSettings );
+      unitInput.Get( attValue, attAdditionals );
    }
 }
