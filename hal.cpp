@@ -66,13 +66,15 @@ namespace siguni
    } 
 
    // Get Logging 
-   CHalUnitInputGetLogging::CHalUnitInputGetLogging( const std::map<std::string_view, interface::ISignal*> & attSignalMap )
+   CHalUnitInputGetLogging::CHalUnitInputGetLogging( 
+      const std::map<std::string_view, interface::ISignal*> & attSignalMap )
       : signalMap( attSignalMap )
    {
 
    } 
 
-   void CHalUnitInputGetLogging::Get( std::string & attGetInput, interface::CAdditionals & attAdditionals )
+   void CHalUnitInputGetLogging::Get( 
+      std::string & attGetInput, interface::CAdditionals & attAdditionals )
    {
       attGetInput = attAdditionals.ReadErrorLog();
    }

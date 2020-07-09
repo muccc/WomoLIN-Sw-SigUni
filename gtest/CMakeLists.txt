@@ -3,6 +3,7 @@ project (${LIB_NAME})
 
 add_executable( ${LIB_NAME} 
 	test.cpp
+   protocol_test.cpp
 	signal_test.cpp
 	unit_test.cpp
    hal_test.cpp

@@ -21,33 +21,31 @@ namespace siguni
       attValue.clear();
 
       std::string buffer; 
-      buffer.clear();
 
-      if( 0 >=  controlbus.ReadData( buffer ) ) { // no data read
-         return false;
-      }
+      controlbus.ReadData( buffer ); 
 
       messageBuffer += buffer;
-      buffer.clear(); // clearing for get key and value from protocol string
-      
+
       auto pos = messageBuffer.find( STARTBYTE );
-      if ( std::string::npos == pos ){
-         messageBuffer.clear();
+      if ( std::string::npos == pos )
+      {
+         messageBuffer.clear(); // no startbyte found
          return false;
       }
+
       // remove all bytes left from startbyte
-      messageBuffer = messageBuffer.substr( pos + 1 ); 
+      messageBuffer = messageBuffer.substr( pos ); 
 
       pos = messageBuffer.find( ENDBYTE );
-      if ( std::string::npos == pos ){
+      if ( std::string::npos == pos ) // no endbyte found
+      {
          return false;
       }
       
       // copy a full message and remove this message from buffer
-      auto protocolString = messageBuffer.substr( 0, pos );
-      messageBuffer = messageBuffer.substr( pos );
+      auto protocolString = messageBuffer.substr( 1, pos-1 );
+      messageBuffer = messageBuffer.substr( pos+1 );
 
-      // separator present ?
       pos = protocolString.find( SEPARATOR );
       if ( std::string::npos == pos ) {
          return false;

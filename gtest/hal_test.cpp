@@ -7,6 +7,8 @@
 
 #include <gtest/gtest.h>
 
+#include <sstream>
+
 namespace siguni::gtest
 {
 
@@ -42,7 +44,6 @@ TEST_F( CHalTest, CHalUnitInputGetSimulationsStatus ) {
    
    // preparations
    std::map<std::string_view, interface::ISignal*> signalmap;
-   auto signal = CSignalSetReset();
 
    auto additionals = interface::CAdditionals();
    std::string inputResult {};
@@ -64,7 +65,6 @@ TEST_F( CHalTest, CHalUnitOutputSetResetSimulationModus ) {
    
    // preparations
    std::map<std::string_view, interface::ISignal*> signalmap;
-   auto signal = CSignalSetReset();
 
    auto additionals = interface::CAdditionals();
    std::string setResetCommand;
@@ -97,6 +97,37 @@ TEST_F( CHalTest, CHalUnitOutputSetResetSimulationModus ) {
    ASSERT_EQ( additionals.SimulationMode, false ) << "invalid command ==> previous command was RESET";   
 	ASSERT_STREQ( additionals.ReadErrorLog().c_str() , 
                  "CHalUnitOutputSetResetSimulationModus::Set ==> unknown attSetOutput: INVALID_SET_RESET" );
+}
+
+TEST_F( CHalTest, CHalUnitInputGetLogging ) {
+   
+   // preparations
+   std::map<std::string_view, interface::ISignal*> signalmap;
+   auto signal = CSignalGetString();
+
+   auto additionals = interface::CAdditionals();
+   std::string inputResult {};
+   
+   auto test = CHalUnitInputGetLogging( signalmap );
+   
+   // we haven't make a log 
+   test.Get( inputResult, additionals ); // readout logging 
+	ASSERT_STREQ( inputResult.c_str() , "" ) << "no logging executed, log string must be empty";
+
+   // now, we make a log
+   std::string functionName = __FUNCTION__ ;
+   std::stringstream ss;
+   ss << __LINE__ ;
+   std::string functionLine = ss.str() ;
+
+   std::string logMessageIdentifier = functionName + ":" + functionLine ;
+   std::string logMessage = "NO_ERROR";
+   std::string logEntry = logMessageIdentifier + " ==> " + logMessage ;
+
+   additionals.WriteErrorLog( logMessageIdentifier, logMessage );
+   test.Get( inputResult, additionals ); // readout logging 
+
+	ASSERT_STREQ( inputResult.c_str() , logEntry.c_str() ) << "expected my log entry";
 }
 
 

@@ -29,6 +29,7 @@ namespace siguni
          static constexpr char SEPARATOR { ';' };
          static constexpr char ENDBYTE   { '$' };
          static constexpr char LINEBREAK { '\n' };
+
    };
 }
 
