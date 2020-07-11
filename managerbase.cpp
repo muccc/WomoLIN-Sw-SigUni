@@ -36,26 +36,31 @@ namespace siguni
 
    }
 
-   void CManagerBase::DoWork()
+   void CManagerBase::ProcessSignal()
    {
-
       std::string key;
       std::string value;      
       std::string valueCopy;      
 
-      while( 1 )
-      {
-         if( true == protocol.GetKeyValue( key, value ) ) {
-            if ( true == signalVector.count(key) ) {
+      if( true == protocol.GetKeyValue( key, value ) ) {
+         if ( true == signalVector.count(key) ) {
 
-               valueCopy = value;
-               signalVector.at(key)->UpdateUnit( key, value, additionals );
+            valueCopy = value;
+            signalVector.at(key)->UpdateUnit( key, value, additionals );
 
-               if( 0 == valueCopy.compare( "GET" ) ) {
-                  protocol.SendKeyValue( key, value );
-               }
+            if( 0 == valueCopy.compare( "GET" ) ) {
+               protocol.SendKeyValue( key, value );
             }
          }
+      }
+   }
+
+   void CManagerBase::DoWork()
+   {
+
+      while( 1 )
+      {
+         ProcessSignal();        
       } 
    }
 }

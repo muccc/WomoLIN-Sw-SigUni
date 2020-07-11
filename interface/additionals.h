@@ -20,26 +20,10 @@ namespace siguni::interface
        CAdditionals() = default;
 		 ~CAdditionals() = default;
 
+       void WriteErrorLog( std::string attIdentifier, std::string attErrorLog );
+       std::string ReadErrorLog(); 
+
        bool SimulationMode { false };      
-
-       void WriteErrorLog( std::string attIdentifier, std::string attErrorLog ) 
-       { 
-         errorLog.clear();
-         errorLog[attIdentifier] = attErrorLog; 
-       };
-
-       std::string ReadErrorLog() 
-       {
-
-         if( errorLog.size() ){
-            return errorLog.begin()->first + " ==> " + errorLog.begin()->second ; 
-         }
-         else {
-            return "" ; 
-         }
-
-       };
-
 		 std::map<std::string_view, std::string> Settings;
 
     private:

@@ -19,7 +19,8 @@ namespace siguni
       public:
          CManagerBase( interface::IControlbus & attControlbus );
          ~CManagerBase() = default;
-
+         
+         void ProcessSignal();
          void DoWork();
 
       protected:

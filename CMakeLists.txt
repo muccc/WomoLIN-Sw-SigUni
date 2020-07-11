@@ -20,5 +20,7 @@ add_library(${PRJ_NAME}
    hal.cpp
    protocol.cpp
    managerbase.cpp
+   additionals.cpp
+   helper.cpp
 
 )

@@ -8,6 +8,8 @@ add_executable( ${LIB_NAME}
 	unit_test.cpp
    hal_test.cpp
 	siguni_test.cpp
+   managerbase_test.cpp
+   helper_test.cpp
 )
 
 target_link_libraries( ${LIB_NAME} 

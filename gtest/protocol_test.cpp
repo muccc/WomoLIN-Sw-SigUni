@@ -2,63 +2,12 @@
 /* Copyright (c) 2020 Project WomoLIN */
 /* Author Myron Franze <myronfranze@web.de> */
 
-#include "../protocol.h"
+#include "mocks.h"
 
 #include <gtest/gtest.h>
 
 namespace siguni::gtest
 {
-
-class CControlbusMock : public siguni::interface::IControlbus
-{
-   public: 
-      CControlbusMock() = default;
-      ~CControlbusMock() = default;
-      
-      int WriteData( const std::string & attMessage ) override final;
-      int ReadData( std::string & attMessage ) override final;
-
-      void SetReadData( const std::string & attReadData ) 
-      { 
-         readData = attReadData; 
-      };
-
-      void SetReadDataReturnValue( int attReadDataReturnValue ) 
-      { 
-         readDataReturnValue = attReadDataReturnValue;  
-      }; 
-
-      std::string GetWrittenData() 
-      { 
-         return writtenData; 
-      };
-
-      void SetWriteDataReturnValue( int attWriteDataReturnValue ) 
-      { 
-         writeDataReturnValue = attWriteDataReturnValue;  
-      }; 
-
-   private:
-      std::string writtenData = "";
-      int readDataReturnValue = 0;
-      std::string readData = "";
-      int writeDataReturnValue = 0;
-};
-   
-
-int CControlbusMock::WriteData( const std::string & attMessage )
-{
-   writtenData = attMessage;
-   return writeDataReturnValue;
-} 
- 
-int CControlbusMock::ReadData( std::string & attMessage )
-{
-   attMessage = readData;
-   return readDataReturnValue;
-} 
-
-
 
 class CProtocolTest  : public ::testing::Test 
 { 
@@ -171,6 +120,22 @@ TEST_F( CProtocolTest, ReadValidKeyValuePairFragments ) {
 	ASSERT_STREQ( key.c_str() , "GetSignals" );
 	ASSERT_STREQ( value.c_str() , "GET" );
 }
+
+TEST_F( CProtocolTest, TwoStartBytes ) {
+   // TODO
+}
+
+TEST_F( CProtocolTest, TwoEndBytes ) {
+   // TODO
+
+}
+
+TEST_F( CProtocolTest, MessageOverflow ) {
+   // TODO
+
+}
+
+
 
 
 TEST_F( CProtocolTest, SendKeyValue ) {
