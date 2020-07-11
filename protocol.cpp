@@ -28,9 +28,9 @@ namespace siguni
       // add read bytes to internal message buffer
       messageBuffer += buffer;
 
-      // search start byte within messagebuffer, if not found then clear messagebuffer 
-      auto pos = messageBuffer.find( STARTBYTE );
-      if ( std::string::npos == pos )
+      // search startbyte within messagebuffer, if not found then clear messagebuffer 
+      auto pos = helper::CSignalStrings::FindFirstCharacter( messageBuffer, STARTBYTE ); 
+      if( pos < 0 )
       {
          messageBuffer.clear(); 
          return false;
@@ -39,10 +39,17 @@ namespace siguni
       // remove all bytes left from startbyte
       messageBuffer = messageBuffer.substr( pos ); 
 
-      // search endbyte 
-      pos = messageBuffer.find( ENDBYTE );
-      if ( std::string::npos == pos ) // no endbyte found
+      // search first endbyte after first startbyte
+      pos = helper::CSignalStrings::FindFirstCharacter( messageBuffer, ENDBYTE ); 
+      if( pos < 0 )
       {
+         // we have a max size of input messages 
+         std::cout << messageBuffer.size() << std::endl;
+         if( messageBuffer.size() > MESSAGE_BUFFER_MAX_SIZE )
+         {
+            // clear buffer to prevent a memory overflow for invalid messages 
+            messageBuffer.clear(); 
+         }
          return false;
       }
       
@@ -52,8 +59,12 @@ namespace siguni
       // remove this message from buffer 
       messageBuffer = messageBuffer.substr( pos+1 );
 
-      // check are there more than one startbytes ?     
-      
+      // if there are more than one startbytes then delete alle previous startbytes     
+      pos = helper::CSignalStrings::FindLastCharacter( protocolString, STARTBYTE ); 
+      if( pos >= 0)
+      {
+         protocolString = protocolString.substr( pos+1 );
+      }
  
       return helper::CSignalStrings::ExtractKeyValue( 
                      protocolString, SEPARATOR, attKey, attValue ); 

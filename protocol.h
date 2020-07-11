@@ -25,6 +25,8 @@ namespace siguni
 
       private:
 
+         static constexpr int  MESSAGE_BUFFER_MAX_SIZE { 32 };
+
          static constexpr char STARTBYTE { '^' };
          static constexpr char SEPARATOR { ';' };
          static constexpr char ENDBYTE   { '$' };

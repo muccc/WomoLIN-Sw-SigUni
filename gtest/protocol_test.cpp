@@ -122,17 +122,63 @@ TEST_F( CProtocolTest, ReadValidKeyValuePairFragments ) {
 }
 
 TEST_F( CProtocolTest, TwoStartBytes ) {
-   // TODO
+
+   std::string keyValuePair = "^Garbage^GetSignals;GET$"; 
+   controlbus.SetReadData( keyValuePair );
+   controlbus.SetReadDataReturnValue( keyValuePair.size() ); 
+
+	ASSERT_EQ( true, test.GetKeyValue( key, value ) );
+	ASSERT_STREQ( key.c_str() , "GetSignals" );
+	ASSERT_STREQ( value.c_str() , "GET" );
 }
 
 TEST_F( CProtocolTest, TwoEndBytes ) {
-   // TODO
+   std::string keyValuePair = "^Garbage^GetSignals;GET$Garbage$"; 
+   controlbus.SetReadData( keyValuePair );
+   controlbus.SetReadDataReturnValue( keyValuePair.size() ); 
 
+	ASSERT_EQ( true, test.GetKeyValue( key, value ) );
+	ASSERT_STREQ( key.c_str() , "GetSignals" );
+	ASSERT_STREQ( value.c_str() , "GET" );
 }
 
 TEST_F( CProtocolTest, MessageOverflow ) {
-   // TODO
 
+   std::string fragment1 = "^Fragment1_has_23_bytes"; 
+   std::string fragment2 = "!!!!!!!!!"; // 9 bytes for no overflow
+   std::string fragment3 = ";GET$"; // 5 bytes 
+
+   // positiv test
+   controlbus.SetReadData( fragment1 );
+   controlbus.SetReadDataReturnValue( fragment1.size() ); 
+	ASSERT_EQ( false, test.GetKeyValue( key, value ) );
+
+   controlbus.SetReadData( fragment2 );
+   controlbus.SetReadDataReturnValue( fragment2.size() ); 
+	ASSERT_EQ( false, test.GetKeyValue( key, value ) );
+
+   controlbus.SetReadData( fragment3 );
+   controlbus.SetReadDataReturnValue( fragment3.size() ); 
+	ASSERT_EQ( true, test.GetKeyValue( key, value ) );
+
+   // overflow test 
+
+   controlbus.SetReadData( fragment1 );
+   controlbus.SetReadDataReturnValue( fragment1.size() ); 
+	ASSERT_EQ( false, test.GetKeyValue( key, value ) );
+
+   // now we provoke a overflow 
+   fragment2 += " "; // fragment1 + fragment2 > 32 bytes
+   controlbus.SetReadData( fragment2 );
+   controlbus.SetReadDataReturnValue( fragment2.size() ); 
+	ASSERT_EQ( false, test.GetKeyValue( key, value ) );
+
+   // previous overflow deleted the previous message bytes
+   controlbus.SetReadData( fragment3 );
+   controlbus.SetReadDataReturnValue( fragment3.size() ); 
+	ASSERT_EQ( false, test.GetKeyValue( key, value ) ); // message was to long
+
+  
 }
 
 
