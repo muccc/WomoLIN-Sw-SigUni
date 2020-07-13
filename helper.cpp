@@ -9,8 +9,6 @@
 namespace siguni::helper
 {
 
-
-
    int CSignalStrings::FindFirstCharacter( const std::string & attSignalMessage, 
                                            const char attCharacter,
                                            const size_t attPos )

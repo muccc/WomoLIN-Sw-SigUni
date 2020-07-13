@@ -182,8 +182,6 @@ TEST_F( CProtocolTest, MessageOverflow ) {
 }
 
 
-
-
 TEST_F( CProtocolTest, SendKeyValue ) {
 
    key = "GetSimulationStatus";

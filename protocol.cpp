@@ -59,7 +59,7 @@ namespace siguni
       // remove this message from buffer 
       messageBuffer = messageBuffer.substr( pos+1 );
 
-      // if there are more than one startbytes then delete alle previous startbytes     
+      // if there is more than one start byte, delete all previous start bytes     
       pos = helper::CSignalStrings::FindLastCharacter( protocolString, STARTBYTE ); 
       if( pos >= 0)
       {
