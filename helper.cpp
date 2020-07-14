@@ -61,8 +61,8 @@ namespace siguni::helper
    }
 
    std::vector<std::string_view> 
-   CSignalStrings::GetValueItems( const std::string & attString, 
-                                  const char attSplitCharacter )
+   CSignalStrings::GetValueItems( const std::string & /*attString*/, 
+                                  const char /*attSplitCharacter*/ )
    {
       std::vector<std::string_view> items;
       return items;
