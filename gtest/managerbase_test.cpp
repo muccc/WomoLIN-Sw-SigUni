@@ -3,6 +3,7 @@
 /* Author Myron Franze <myronfranze@web.de> */
 
 #include "../managerbase.h"
+#include "../interface/helper.h"
 #include "mocks.h"
 
 #include <gtest/gtest.h>
@@ -45,32 +46,40 @@ protected:
 TEST_F( CManagerbaseTest, GetSignals ) {
 
    auto test = CManager();
-   std::string message = "^GetSignals;GET$";
 
-   test.ControlbusMock.SetReadData( message );
-
+   // simulate received message for the manager
+   std::string receivedMessage = "^GetSignals;GET$";
+   test.ControlbusMock.SetReadData( receivedMessage );
+   
+   // call a single process step from manager
+   // the manager has to process the received message
+   // and send the response via the contolbus
    test.ProcessSignal();
 
+   // readout the send message from the controlbus mock
    auto returnMessage = test.ControlbusMock.GetWrittenData();
-   // delete start and endbytes 
+
+   // delete start and endbytes from the response message 
    returnMessage = returnMessage.substr( 1, returnMessage.size() - 3 );
-   // split into key and value 
-   auto splitPos = returnMessage.find( ";" );
-   auto key = returnMessage.substr( 0, splitPos );
-   auto val = returnMessage.substr( splitPos + 1 );
-   
+
+   std::string key;
+   std::string value;
+
+	ASSERT_EQ( true, helper::CSignalStrings::ExtractKeyValue( returnMessage, ';', key, value ) );
+ 
+  
+   // the reponse key must be equal to the request key 
 	ASSERT_STREQ( key.c_str() , "GetSignals" );
 
-   std::vector<std::string> valueItems;
+   std::vector<std::string> expectedValueItems = 
+   { "GetLogging", "GetSignals", "GetSimulationStatus", "SetResetSimulationModus" };
 
-/*
-   do 
-   {
-      splitPos = val.find(",")
-      if()
+   auto valueItems = helper::CSignalStrings::GetValueItems( value, ',' );
 
-   } while()
-*/
+	ASSERT_EQ( true, helper::CSignalStrings::CompareTwoStringVectors( expectedValueItems, valueItems ) ) << \
+      value << "\n" << \
+      helper::CSignalStrings::CreateStringFromVector( expectedValueItems, ',' ); 
+
 }
 
 

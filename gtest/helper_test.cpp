@@ -9,6 +9,7 @@
 namespace siguni::gtest
 {
 
+// CHelperSignalStringsFindFirstCharacter  
 class CHelperSignalStringsFindFirstCharacter  : public ::testing::Test {}; 
 
 TEST_F( CHelperSignalStringsFindFirstCharacter, PositionTests ) {
@@ -31,7 +32,7 @@ TEST_F( CHelperSignalStringsFindFirstCharacter, PositionTests ) {
    pos = helper::CSignalStrings::FindFirstCharacter( testString, '^'); 
 	ASSERT_EQ( 0, pos );
 
-   // with offset 1, we expect the position of the second pos
+   // offset 1, we expect the position of the second pos
    pos = helper::CSignalStrings::FindFirstCharacter( testString, '^', 1); 
 	ASSERT_EQ( 4, pos );
 
@@ -44,18 +45,40 @@ TEST_F( CHelperSignalStringsFindFirstCharacter, PositionTests ) {
 	ASSERT_EQ( -1, pos );
 }
 
+// CHelperSignalStringsFindLastCharacter  
 class CHelperSignalStringsFindLastCharacter  : public ::testing::Test {}; 
 
-TEST_F( CHelperSignalStringsFindLastCharacter, PositionTests ) {
+TEST_F( CHelperSignalStringsFindLastCharacter, TODO ) {
 
-   // TODO
 }
 
+
+// CHelperSignalStringsExtractKeyValue  
 class CHelperSignalStringsExtractKeyValue  : public ::testing::Test {}; 
 
-TEST_F( CHelperSignalStringsExtractKeyValue, PositionTests ) {
+TEST_F( CHelperSignalStringsExtractKeyValue, TODO ) {
 
-   // TODO
+}
+
+// CHelperSignalStringsGetValueItems 
+class CHelperSignalStringsGetValueItems : public ::testing::Test {}; 
+
+TEST_F( CHelperSignalStringsGetValueItems, SplitWithReturnCheck ) {
+
+   std::vector<std::string> expectedItems = 
+   { "GetLogging", "GetSignals", "GetSimulationStatus", "SetResetSimulationModus" };
+
+   // generate teststring from vector
+   auto separator = ',';
+   auto testString = helper::CSignalStrings::CreateStringFromVector( expectedItems, separator );
+    
+   // call test function 
+   auto items = helper::CSignalStrings::GetValueItems( testString, separator ); 
+
+
+	ASSERT_EQ( true, helper::CSignalStrings::CompareTwoStringVectors( expectedItems, items ) ) << \
+      testString << "\n" << helper::CSignalStrings::CreateStringFromVector( items, separator );
+  
 }
 
 

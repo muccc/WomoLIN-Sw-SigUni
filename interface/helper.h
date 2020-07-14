@@ -30,8 +30,13 @@ namespace siguni::helper
                                    std::string & attKey,
                                    std::string & attValue );
 
-      static std::vector<std::string_view> 
-      GetValueItems( const std::string & attString, const char attSplitCharacter );    
+      static std::vector<std::string> 
+      GetValueItems( std::string attString, const char attSplitCharacter );    
+
+      static bool CompareTwoStringVectors( std::vector<std::string> attStr1, std::vector<std::string> attStr2 );    
+
+      static std::string
+      CreateStringFromVector( std::vector<std::string> attStrVector, const char attSplitCharacter );
 
    };
 }

@@ -60,13 +60,59 @@ namespace siguni::helper
       return true;
    }
 
-   std::vector<std::string_view> 
-   CSignalStrings::GetValueItems( const std::string & /*attString*/, 
-                                  const char /*attSplitCharacter*/ )
+   std::vector<std::string> 
+   CSignalStrings::GetValueItems( std::string attString, 
+                                  const char attSplitCharacter )
    {
-      std::vector<std::string_view> items;
+      std::vector<std::string> items;
+
+      size_t pos = 0;
+      std::string token;
+
+      while ( ( pos = attString.find( attSplitCharacter ) ) != std::string::npos) {
+         items.push_back( attString.substr( 0, pos ) );
+         attString.erase( 0, pos + 1 );
+      }
+      items.push_back( attString );
+
       return items;
    }    
+
+   bool CSignalStrings::CompareTwoStringVectors( std::vector<std::string> attStr1, 
+                                                 std::vector<std::string> attStr2 )    
+   {
+      sort( attStr1.begin(), attStr1.end() ); 
+      sort( attStr2.begin(), attStr2.end() ); 
+      
+      if( attStr1.size() != attStr2.size() ){
+         return false;
+      }
+
+      for ( unsigned int i=0; i<attStr1.size(); i++ ) 
+      {
+         if( 0 != attStr1[i].compare( attStr2[i] ) )
+         {
+            return false;
+         }
+      }
+      
+      return true;
+   }
+
+
+   std::string CSignalStrings::CreateStringFromVector( std::vector<std::string> attStrVector, 
+                                                       const char attSplitCharacter )
+   {
+      std::string vectorString;
+      vectorString += attStrVector[0];
+      for ( unsigned int i=1; i<attStrVector.size(); i++ ) 
+      {
+         vectorString += attSplitCharacter;  
+         vectorString += attStrVector[i];
+      }
+      
+      return vectorString; 
+   }
 
 }
 
