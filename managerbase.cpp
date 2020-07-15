@@ -44,9 +44,9 @@ namespace siguni
 
       if( true == protocol.GetKeyValue( key, value ) ) {
          if ( true == signalVector.count(key) ) {
-
+            
             valueCopy = value;
-            signalVector.at(key)->UpdateUnit( key, value, additionals );
+            signalVector.at( key )->UpdateUnit( key, value, additionals );
 
             if( 0 == valueCopy.compare( "GET" ) ) {
                protocol.SendKeyValue( key, value );

@@ -44,7 +44,6 @@ namespace siguni
       if( pos < 0 )
       {
          // we have a max size of input messages 
-         std::cout << messageBuffer.size() << std::endl;
          if( messageBuffer.size() > MESSAGE_BUFFER_MAX_SIZE )
          {
             // clear buffer to prevent a memory overflow for invalid messages 

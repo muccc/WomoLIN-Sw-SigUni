@@ -34,41 +34,49 @@ protected:
 
    void SetUp()
    {
+     CManager test = CManager();
    }
+
+   CManager test;
 
    std::string key;
    std::string value;
 
 };
 
-// start tests
+// *********************************************
+// Common helper functions
+// *********************************************
 
-TEST_F( CManagerbaseTest, GetSignals ) {
-
-   auto test = CManager();
+std::string SendMessageAndReceiveResponse( CManager & manager, std::string message)
+{
 
    // simulate received message for the manager
-   std::string receivedMessage = "^GetSignals;GET$";
-   test.ControlbusMock.SetReadData( receivedMessage );
+   manager.ControlbusMock.SetReadData( message );
    
    // call a single process step from manager
    // the manager has to process the received message
    // and send the response via the contolbus
-   test.ProcessSignal();
+   manager.ProcessSignal();
 
    // readout the send message from the controlbus mock
-   auto returnMessage = test.ControlbusMock.GetWrittenData();
+   auto returnMessage = manager.ControlbusMock.GetWrittenData();
 
    // delete start and endbytes from the response message 
-   returnMessage = returnMessage.substr( 1, returnMessage.size() - 3 );
+   return returnMessage.substr( 1, returnMessage.size() - 3 );
 
-   std::string key;
-   std::string value;
+}
+
+// *********************************************
+// Get Signals 
+// *********************************************
+
+TEST_F( CManagerbaseTest, GetSignals ) {
+
+   auto returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET$" );
 
 	ASSERT_EQ( true, helper::CSignalStrings::ExtractKeyValue( returnMessage, ';', key, value ) );
  
-  
-   // the reponse key must be equal to the request key 
 	ASSERT_STREQ( key.c_str() , "GetSignals" );
 
    std::vector<std::string> expectedValueItems = 
@@ -79,6 +87,91 @@ TEST_F( CManagerbaseTest, GetSignals ) {
 	ASSERT_EQ( true, helper::CSignalStrings::CompareTwoStringVectors( expectedValueItems, valueItems ) ) << \
       value << "\n" << \
       helper::CSignalStrings::CreateStringFromVector( expectedValueItems, ',' ); 
+
+}
+
+// ******************************************************************************************
+// Simulation Modus
+//
+// *1 set/reset output command does not send a response, the serial mock have the old values
+// ******************************************************************************************
+
+void AssertResult( std::string returnMessage, 
+                   std::string key, std::string key_expected, 
+                   std::string value, std::string value_expected )
+{
+
+	ASSERT_EQ( true, helper::CSignalStrings::ExtractKeyValue( returnMessage, ';', key, value ) );
+
+	ASSERT_STREQ( key.c_str() , key_expected.c_str() );
+	ASSERT_STREQ( value.c_str() , value_expected.c_str() );
+
+}
+
+TEST_F( CManagerbaseTest, SimulationModus ) {
+
+   // *********************************************
+   // get the current state of the simulation modus
+   // *********************************************
+   auto returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
+
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "RESET" );
+
+   // *********************************************
+   // change from RESET to RESET 
+   // *********************************************
+   returnMessage = SendMessageAndReceiveResponse( test, "^SetResetSimulationModus;RESET$" );
+
+   // see *1 
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "RESET" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
+
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "RESET" );
+
+   // *********************************************
+   // change from RESET to SET 
+   // *********************************************
+ 
+   returnMessage = SendMessageAndReceiveResponse( test, "^SetResetSimulationModus;SET$" );
+
+   // see *1 
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "RESET" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
+
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "SET" );
+
+   // *********************************************
+   // change from SET to SET 
+   // *********************************************
+ 
+   returnMessage = SendMessageAndReceiveResponse( test, "^SetResetSimulationModus;SET$" );
+
+   // see *1 
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "SET" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
+
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "SET" );
+
+   // *********************************************
+   // change from SET to RESET 
+   // *********************************************
+ 
+   returnMessage = SendMessageAndReceiveResponse( test, "^SetResetSimulationModus;RESET$" );
+
+   // see *1 
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "SET" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
+
+   AssertResult( returnMessage, key, "GetSimulationStatus", value, "RESET" );
+
+}
+
+TEST_F( CManagerbaseTest, Logging ) {
+
 
 }
 
