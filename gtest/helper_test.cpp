@@ -116,8 +116,6 @@ TEST_F( CHelperSignalStringsSplitKeyValue, NegativeTests ) {
 
 }
 
-
-
 // GetValueItems 
 class CHelperSignalStringsGetValueItems : public ::testing::Test {}; 
 
@@ -139,7 +137,30 @@ TEST_F( CHelperSignalStringsGetValueItems, SplitWithReturnCheck ) {
   
 }
 
+// CompareTwoStringVectors 
+class CHelperSignalStringsCompareTwoStringVectors: public ::testing::Test {}; 
 
+TEST_F( CHelperSignalStringsCompareTwoStringVectors, CompareTests ) {
 
+   std::vector<std::string> string1;
+   std::vector<std::string> string2;
+ 
+   auto result = helper::CSignalStrings::CompareTwoStringVectors( string1, string2 ); 
+   ASSERT_EQ( true, result ) << "two empty strings";
+
+   string1.push_back("one1");
+   result = helper::CSignalStrings::CompareTwoStringVectors( string1, string2 ); 
+   ASSERT_EQ( false, result ) << "vectors have different sizes";
+
+   string2.push_back("two2");
+   result = helper::CSignalStrings::CompareTwoStringVectors( string1, string2 ); 
+   ASSERT_EQ( false, result ) << "same sizes but different entries";
+
+   string1.push_back("two2");
+   string2.push_back("one1");
+   result = helper::CSignalStrings::CompareTwoStringVectors( string1, string2 ); 
+   ASSERT_EQ( true, result ) << "same sizes, same entries, but different sequences"; 
+
+}
 
 }
