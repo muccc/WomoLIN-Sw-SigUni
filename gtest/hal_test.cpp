@@ -12,17 +12,30 @@
 namespace siguni::gtest
 {
 
-class CHalTest  : public ::testing::Test { };
+class CHalTest  : public ::testing::Test 
+{ 
+protected:
+
+   CHalTest() 
+      : additionals( interface::CAdditionals() ) 
+      , signal( CSignalGetString() )
+   {
+   }
+
+   void SetUp()
+   {
+      std::map<std::string_view, interface::ISignal*> signalmap;
+   }
+
+   std::map<std::string_view, interface::ISignal*> signalmap;
+   interface::CAdditionals                         additionals;
+   CSignalGetString                                signal;
+
+   std::string inputResult {};
+};
 
 
 TEST_F( CHalTest, CHalUnitInputGetSignals ) {
-   
-   // preparations
-   std::map<std::string_view, interface::ISignal*> signalmap;
-   auto signal = CSignalGetString();
-
-   auto additionals = interface::CAdditionals();
-   std::string inputResult {};
    
    // empty list
    auto test = CHalUnitInputGetSignals( signalmap );
@@ -42,12 +55,6 @@ TEST_F( CHalTest, CHalUnitInputGetSignals ) {
 
 TEST_F( CHalTest, CHalUnitInputGetSimulationsStatus ) {
    
-   // preparations
-   std::map<std::string_view, interface::ISignal*> signalmap;
-
-   auto additionals = interface::CAdditionals();
-   std::string inputResult {};
-   
    auto test = CHalUnitInputGetSimulationStatus( signalmap );
 
    // default setting for simulation 
@@ -63,10 +70,6 @@ TEST_F( CHalTest, CHalUnitInputGetSimulationsStatus ) {
 
 TEST_F( CHalTest, CHalUnitOutputSetResetSimulationModus ) {
    
-   // preparations
-   std::map<std::string_view, interface::ISignal*> signalmap;
-
-   auto additionals = interface::CAdditionals();
    std::string setResetCommand;
    
    auto test = CHalUnitOutputSetResetSimulationModus( signalmap );
@@ -100,13 +103,6 @@ TEST_F( CHalTest, CHalUnitOutputSetResetSimulationModus ) {
 }
 
 TEST_F( CHalTest, CHalUnitInputGetLogging ) {
-   
-   // preparations
-   std::map<std::string_view, interface::ISignal*> signalmap;
-   auto signal = CSignalGetString();
-
-   auto additionals = interface::CAdditionals();
-   std::string inputResult {};
    
    auto test = CHalUnitInputGetLogging( signalmap );
    
