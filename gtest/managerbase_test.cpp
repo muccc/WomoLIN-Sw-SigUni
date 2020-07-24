@@ -53,7 +53,7 @@ std::string SendMessageAndReceiveResponse( CManager & manager, std::string messa
 
    // simulate received message for the manager
    manager.ControlbusMock.SetReadData( message );
-   
+
    // call a single process step from manager
    // the manager has to process the received message
    // and send the response via the contolbus
@@ -63,7 +63,15 @@ std::string SendMessageAndReceiveResponse( CManager & manager, std::string messa
    auto returnMessage = manager.ControlbusMock.GetWrittenData();
 
    // delete start and endbytes from the response message 
-   return returnMessage.substr( 1, returnMessage.size() - 3 );
+   // expected "^blabla$\n"
+   if (returnMessage.size() >= 4) 
+   {
+      return returnMessage.substr( 1, returnMessage.size() - 3 );
+   }
+   else
+   {
+      return returnMessage;
+   }
 
 }
 
@@ -111,7 +119,7 @@ void AssertResult( std::string returnMessage,
 TEST_F( CManagerbaseTest, SimulationModus ) {
 
    // *********************************************
-   // get the current state of the simulation modus
+   // get the current status of the simulation modus
    // *********************************************
    auto returnMessage = SendMessageAndReceiveResponse( test, "^GetSimulationStatus;GET$" );
 
@@ -171,8 +179,11 @@ TEST_F( CManagerbaseTest, SimulationModus ) {
 }
 
 TEST_F( CManagerbaseTest, Logging ) {
-   // TODO
 
+   auto returnMessage = SendMessageAndReceiveResponse( test, "^GetLogging;GET$" );
+   AssertResult( returnMessage, key, "GetLogging", value, "" ) << "no logging was triggered";
+
+   // TODO provoke logging
 }
 
 
