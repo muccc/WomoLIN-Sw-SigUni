@@ -18,25 +18,32 @@ namespace siguni::helper
 
    public: 
 
-      static int FindFirstCharacter( const std::string & attSignalMessage, 
-                                     const char attCharacter,
-                                     const size_t attPos = 0 );
+      static int FindFirstCharacter( 
+             const std::string & attSignalMessage, 
+             const char attCharacter,
+             const size_t attPos = 0 );
 
-      static int FindLastCharacter( const std::string & attSignalMessage, 
-                                    const char attCharacter );
+      static int FindLastCharacter( 
+             const std::string & attSignalMessage, 
+             const char attCharacter );
 
-      static bool ExtractKeyValue( const std::string & attSignalMessage, 
-                                   const char attSplitCharacter,
-                                   std::string & attKey,
-                                   std::string & attValue );
+      static bool SplitKeyValue( 
+             const std::string & attSignalMessage, 
+             const char attDelimiter,
+             std::string & attKey,
+             std::string & attValue );
 
-      static std::vector<std::string> 
-      GetValueItems( std::string attString, const char attSplitCharacter );    
+      static std::vector<std::string> GetValueItems( 
+             std::string attString, 
+             const char attDelimiter );    
 
-      static bool CompareTwoStringVectors( std::vector<std::string> attStr1, std::vector<std::string> attStr2 );    
+      static bool CompareTwoStringVectors( 
+             std::vector<std::string> attStr1, 
+             std::vector<std::string> attStr2 );    
 
-      static std::string
-      CreateStringFromVector( std::vector<std::string> attStrVector, const char attSplitCharacter );
+      static std::string CreateStringFromVector( 
+             std::vector<std::string> attStrVector, 
+             const char attDelimiter );
 
    };
 }

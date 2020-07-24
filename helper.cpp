@@ -42,34 +42,39 @@ namespace siguni::helper
       return lastPos;
    }
 
-   bool CSignalStrings::ExtractKeyValue( const std::string & attSignalMessage, 
-                                         const char attSplitCharacter,
-                                         std::string & attKey,
-                                         std::string & attValue )
+   bool CSignalStrings::SplitKeyValue( const std::string & attSignalMessage, 
+                                       const char attDelimiter,
+                                       std::string & attKey,
+                                       std::string & attValue )
    {
 
-      auto pos = attSignalMessage.find( attSplitCharacter );
-      if ( std::string::npos == pos ) {
+      auto firstPos = attSignalMessage.find( attDelimiter );
+      if ( std::string::npos == firstPos ) {
          return false;
       }
 
+      auto secondPos = attSignalMessage.substr( firstPos + 1 ).find( attDelimiter );
+      if ( std::string::npos != secondPos ) {
+         return false; // found more than one delimiter 
+      }
+
       // extract key and value 
-      attKey = attSignalMessage.substr( 0, pos );
-      attValue = attSignalMessage.substr( pos + 1 );
+      attKey = attSignalMessage.substr( 0, firstPos );
+      attValue = attSignalMessage.substr( firstPos + 1 );
 
       return true;
    }
 
    std::vector<std::string> 
    CSignalStrings::GetValueItems( std::string attString, 
-                                  const char attSplitCharacter )
+                                  const char attDelimiter )
    {
       std::vector<std::string> items;
 
       size_t pos = 0;
       std::string token;
 
-      while ( ( pos = attString.find( attSplitCharacter ) ) != std::string::npos) {
+      while ( ( pos = attString.find( attDelimiter ) ) != std::string::npos) {
          items.push_back( attString.substr( 0, pos ) );
          attString.erase( 0, pos + 1 );
       }
@@ -101,13 +106,13 @@ namespace siguni::helper
 
 
    std::string CSignalStrings::CreateStringFromVector( std::vector<std::string> attStrVector, 
-                                                       const char attSplitCharacter )
+                                                       const char attDelimiter )
    {
       std::string vectorString;
       vectorString += attStrVector[0];
       for ( unsigned int i=1; i<attStrVector.size(); i++ ) 
       {
-         vectorString += attSplitCharacter;  
+         vectorString += attDelimiter;  
          vectorString += attStrVector[i];
       }
       

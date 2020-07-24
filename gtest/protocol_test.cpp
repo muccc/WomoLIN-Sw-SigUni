@@ -16,7 +16,8 @@ protected:
       : controlbus( CControlbusMock() )
       , test( controlbus )
    {
-   };
+   }
+
    virtual ~CProtocolTest() = default; 
 
    void SetUp()

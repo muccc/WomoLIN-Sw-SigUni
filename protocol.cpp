@@ -65,7 +65,7 @@ namespace siguni
          protocolString = protocolString.substr( pos+1 );
       }
  
-      return helper::CSignalStrings::ExtractKeyValue( 
+      return helper::CSignalStrings::SplitKeyValue( 
                      protocolString, SEPARATOR, attKey, attValue ); 
 
    }

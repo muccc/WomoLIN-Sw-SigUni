@@ -9,13 +9,17 @@
 namespace siguni::gtest
 {
 
-// CHelperSignalStringsFindFirstCharacter  
+// FindFirstCharacter  
 class CHelperSignalStringsFindFirstCharacter  : public ::testing::Test {}; 
 
 TEST_F( CHelperSignalStringsFindFirstCharacter, PositionTests ) {
 
-   std::string testString = "^OneCaptureByteAtPostion0";
-   auto pos = helper::CSignalStrings::FindFirstCharacter( testString, '^'); 
+   std::string testString = "NoCaptureByte"; 
+   auto pos = helper::CSignalStrings::FindFirstCharacter( testString, '^' ); 
+	ASSERT_EQ( -1, pos );
+
+   testString = "^OneCaptureByteAtPostion0";
+   pos = helper::CSignalStrings::FindFirstCharacter( testString, '^'); 
 	ASSERT_EQ( 0, pos );
 
    pos = helper::CSignalStrings::FindFirstCharacter( testString, '^', 0); 
@@ -40,27 +44,81 @@ TEST_F( CHelperSignalStringsFindFirstCharacter, PositionTests ) {
    pos = helper::CSignalStrings::FindFirstCharacter( testString, '^' ); 
 	ASSERT_EQ( 13, pos );
 
-   testString = "NoCaptureByte"; 
-   pos = helper::CSignalStrings::FindFirstCharacter( testString, '^' ); 
-	ASSERT_EQ( -1, pos );
 }
 
-// CHelperSignalStringsFindLastCharacter  
+// FindLastCharacter  
 class CHelperSignalStringsFindLastCharacter  : public ::testing::Test {}; 
 
-TEST_F( CHelperSignalStringsFindLastCharacter, TODO ) {
+TEST_F( CHelperSignalStringsFindLastCharacter, PositionTests ) {
+
+   std::string testString = "NoCaptureByte"; 
+   auto pos = helper::CSignalStrings::FindLastCharacter( testString, '^' ); 
+	ASSERT_EQ( -1, pos );
+
+   testString = "^OneCaptureByteAtPostion0";
+   pos = helper::CSignalStrings::FindLastCharacter( testString, '^'); 
+	ASSERT_EQ( 0, pos );
+
+   testString = "OneCaptureByteAtEndPostion^";
+   pos = helper::CSignalStrings::FindLastCharacter( testString, '^'); 
+	ASSERT_EQ( testString.size() - 1, pos );
+
+   testString = "^Capture^ByteAtPostion8";
+   pos = helper::CSignalStrings::FindLastCharacter( testString, '^'); 
+	ASSERT_EQ( 8, pos );
+
+   testString = "^Capture^ByteAtEndPostion^";
+   pos = helper::CSignalStrings::FindLastCharacter( testString, '^'); 
+	ASSERT_EQ( testString.size() - 1, pos );
+}
+
+
+// ExtractKeyValue  
+class CHelperSignalStringsSplitKeyValue  : public ::testing::Test 
+{
+
+protected:
+   std::string signalMessage;
+   std::string key;
+   std::string value;
+   bool testresult;
+}; 
+
+TEST_F( CHelperSignalStringsSplitKeyValue, PositiveTest ) {
+
+   signalMessage = "GetSignals;GET";
+
+   testresult = helper::CSignalStrings::SplitKeyValue( signalMessage, ';', key, value ); 
+
+   ASSERT_EQ( true, testresult ); 
+
+	ASSERT_STREQ( key.c_str(), "GetSignals" );
+	ASSERT_STREQ( value.c_str(), "GET" );
+}
+
+
+TEST_F( CHelperSignalStringsSplitKeyValue, NegativeTests ) {
+
+   signalMessage = "GetSignals,GET";
+
+   testresult = helper::CSignalStrings::SplitKeyValue( signalMessage, ';', key, value ); 
+   ASSERT_EQ( false, testresult ); 
+
+   signalMessage = ";GetSignals;GET";
+
+   testresult = helper::CSignalStrings::SplitKeyValue( signalMessage, ';', key, value ); 
+   ASSERT_EQ( false, testresult ); 
+
+   signalMessage = "GetSignals;GET;";
+
+   testresult = helper::CSignalStrings::SplitKeyValue( signalMessage, ';', key, value ); 
+   ASSERT_EQ( false, testresult ); 
 
 }
 
 
-// CHelperSignalStringsExtractKeyValue  
-class CHelperSignalStringsExtractKeyValue  : public ::testing::Test {}; 
 
-TEST_F( CHelperSignalStringsExtractKeyValue, TODO ) {
-
-}
-
-// CHelperSignalStringsGetValueItems 
+// GetValueItems 
 class CHelperSignalStringsGetValueItems : public ::testing::Test {}; 
 
 TEST_F( CHelperSignalStringsGetValueItems, SplitWithReturnCheck ) {

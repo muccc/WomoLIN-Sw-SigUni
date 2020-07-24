@@ -75,7 +75,7 @@ TEST_F( CManagerbaseTest, GetSignals ) {
 
    auto returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET$" );
 
-	ASSERT_EQ( true, helper::CSignalStrings::ExtractKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
  
 	ASSERT_STREQ( key.c_str() , "GetSignals" );
 
@@ -101,7 +101,7 @@ void AssertResult( std::string returnMessage,
                    std::string value, std::string value_expected )
 {
 
-	ASSERT_EQ( true, helper::CSignalStrings::ExtractKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
 
 	ASSERT_STREQ( key.c_str() , key_expected.c_str() );
 	ASSERT_STREQ( value.c_str() , value_expected.c_str() );
@@ -171,7 +171,7 @@ TEST_F( CManagerbaseTest, SimulationModus ) {
 }
 
 TEST_F( CManagerbaseTest, Logging ) {
-
+   // TODO
 
 }
 
