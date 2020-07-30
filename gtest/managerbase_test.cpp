@@ -181,7 +181,9 @@ TEST_F( CManagerbaseTest, SimulationModus ) {
 TEST_F( CManagerbaseTest, Logging ) {
 
    auto returnMessage = SendMessageAndReceiveResponse( test, "^GetLogging;GET$" );
-   AssertResult( returnMessage, key, "GetLogging", value, "" ) << "no logging was triggered";
+
+   // check if logging was triggered
+   AssertResult( returnMessage, key, "GetLogging", value, "" );
 
    // TODO provoke logging
 }
