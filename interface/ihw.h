@@ -14,8 +14,8 @@ namespace siguni::interface
       public:
          virtual ~IControlbus() = default;
 
-         virtual int WriteData( const std::string & attMessage ) = 0;
-         virtual int ReadData( std::string & attMessage ) = 0;
+         [[nodiscard]] virtual int WriteData( const std::string & attMessage ) = 0;
+         [[nodiscard]] virtual int ReadData( std::string & attMessage ) = 0;
    };
 
 	class IUnitInputGetHwBoardVersion : public siguni::interface::IUnitInput

@@ -15,7 +15,9 @@ namespace siguni
          CProtocol( interface::IControlbus & attControlbus );
          ~CProtocol() = default;
 
+         [[nodiscard]] 
          bool GetKeyValue( std::string & attKey, std::string & attValue);
+
          void SendKeyValue( std::string & attKey, std::string & attValue);
 
       private:

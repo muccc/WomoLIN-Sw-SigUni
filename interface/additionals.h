@@ -21,7 +21,7 @@ namespace siguni::interface
 		 ~CAdditionals() = default;
 
        void WriteErrorLog( std::string attIdentifier, std::string attErrorLog );
-       std::string ReadErrorLog(); 
+       [[nodiscard]] std::string ReadErrorLog(); 
 
        bool SimulationMode { false };      
 		 std::map<std::string_view, std::string> Settings;
