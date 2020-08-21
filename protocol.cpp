@@ -31,9 +31,6 @@ namespace siguni
       // add read bytes to internal message buffer
       messageBuffer += buffer;
 
-      // add read bytes to internal message buffer
-      messageBuffer += buffer;
-
       // search startbyte within messagebuffer, if not found then clear messagebuffer 
       auto pos = helper::CSignalStrings::FindFirstCharacter( messageBuffer, STARTBYTE ); 
       if( pos < 0 )
