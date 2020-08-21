@@ -18,12 +18,18 @@ namespace siguni
    bool CProtocol::GetKeyValue( std::string & attKey, std::string & attValue)
    {
       // if no key or value found, then send empty strings
-      attKey.clear(); 
+      attKey.clear();
       attValue.clear();
-      
+
       // read bytes to buffer 
-      std::string buffer; 
-      controlbus.ReadData( buffer ); 
+      std::string buffer;
+      if ( 0 >= controlbus.ReadData( buffer ) )
+      {
+          return false;
+      }
+
+      // add read bytes to internal message buffer
+      messageBuffer += buffer;
 
       // add read bytes to internal message buffer
       messageBuffer += buffer;
