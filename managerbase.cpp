@@ -48,7 +48,7 @@ namespace siguni
             valueCopy = value;
             signalVector.at( key )->UpdateUnit( key, value, additionals );
 
-            if( 0 == valueCopy.compare( "GET" ) ) {
+            if( std::string::npos != valueCopy.find("GET") ) {
                protocol.SendKeyValue( key, value );
             }
          }

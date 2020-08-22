@@ -3,12 +3,14 @@
 /* Author Myron Franze <myronfranze@web.de> */
 
 #include "hal.h"
+#include "interface/helper.h"
 
 namespace siguni
 {
 
    // Get Signals
-   CHalUnitInputGetSignals::CHalUnitInputGetSignals ( const std::map<std::string_view, interface::ISignal*> & attSignalMap )
+   CHalUnitInputGetSignals::CHalUnitInputGetSignals ( 
+      const std::map<std::string_view, interface::ISignal*> & attSignalMap )
       : signalMap( attSignalMap )
    {
 
@@ -17,16 +19,57 @@ namespace siguni
    void CHalUnitInputGetSignals::Get( std::string & attGetInput, 
                                       interface::CAdditionals & /*attAdditionals*/ )
    {
-      attGetInput.clear();
-      attGetInput.append( "\n" ); 
-      for(const auto & [key, ignored]  : signalMap ){
-         attGetInput.append( key ); 
-         attGetInput.append( "\n" ); 
+
+      if( 0 == attGetInput.compare("GET") )
+      {
+         attGetInput =  std::to_string( signalMap.size() );
+         return; 
       }
+
+      // we expect the format "GET,indexvalue", indexvalue > 0
+      auto valueItems = helper::CSignalStrings::GetValueItems( attGetInput, ',');
+
+      if( 2 != valueItems.size() ) 
+      {
+         attGetInput = "invalid value";
+         return;
+      }
+
+      if( 0 != valueItems.at(0).compare("GET") )    
+      {
+         attGetInput = "invalid value";
+         return;
+      }
+ 
+      auto index = std::atoi( valueItems.at(1).c_str()); 
+
+      if( index == 0)
+      {
+         attGetInput = "can't convert index";
+         return; 
+      }
+
+      if( index > static_cast<int>(signalMap.size()) )
+      {
+         attGetInput = "index out of range";
+         return; 
+      }
+      
+      auto count = 1;
+      for(const auto & [key, ignored]  : signalMap ){
+         if( count == index )
+         {
+            attGetInput =  key; 
+            break;
+         } 
+         count++;
+      }
+
    }
    
    // Get Simulation Status 
-   CHalUnitInputGetSimulationStatus::CHalUnitInputGetSimulationStatus( const std::map<std::string_view, interface::ISignal*> & attSignalMap )
+   CHalUnitInputGetSimulationStatus::CHalUnitInputGetSimulationStatus( 
+      const std::map<std::string_view, interface::ISignal*> & attSignalMap )
       : signalMap( attSignalMap )
    {
 

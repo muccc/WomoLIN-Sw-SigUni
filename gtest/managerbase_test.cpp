@@ -83,19 +83,37 @@ std::string SendMessageAndReceiveResponse( CManager & manager, std::string messa
 TEST_F( CManagerbaseTest, GetSignals ) {
 
    auto returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET$" );
-
 	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
- 
 	ASSERT_STREQ( key.c_str() , "GetSignals" );
+	ASSERT_STREQ( value.c_str() , "4" );
 
-   std::vector<std::string> expectedValueItems = 
-   { "GetLogging", "GetSignals", "GetSimulationStatus", "SetResetSimulationModus" };
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,bla$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "can't convert index" );
 
-   auto valueItems = helper::CSignalStrings::GetValueItems( value, ',' );
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,0$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "can't convert index" );
 
-	ASSERT_EQ( true, helper::CSignalStrings::CompareTwoStringVectors( expectedValueItems, valueItems ) ) << \
-      value << "\n" << \
-      helper::CSignalStrings::CreateStringFromVector( expectedValueItems, ',' ); 
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,1$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "GetLogging" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,2$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "GetSignals" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,3$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "GetSimulationStatus" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,4$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "SetResetSimulationModus" );
+
+   returnMessage = SendMessageAndReceiveResponse( test, "^GetSignals;GET,5$" );
+	ASSERT_EQ( true, helper::CSignalStrings::SplitKeyValue( returnMessage, ';', key, value ) );
+	ASSERT_STREQ( value.c_str() , "index out of range" );
 
 }
 

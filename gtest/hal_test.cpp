@@ -36,21 +36,25 @@ protected:
 
 
 TEST_F( CHalTest, CHalUnitInputGetSignals ) {
-   
+  
+ 
    // empty list
+   inputResult = "GET";
    auto test = CHalUnitInputGetSignals( signalmap );
-   test.Get( inputResult, additionals ); // readout signal list
-	ASSERT_STREQ( inputResult.c_str() , "" ) << "no signals added, result list must be empty" ;
+   test.Get( inputResult, additionals ); 
+	ASSERT_STREQ( inputResult.c_str() , "0" );
 
    // one signal
-   signalmap["TEST"] = &signal; // add a signal called TEST, reference to signal
+   inputResult = "GET,1";
+   signalmap["TEST1"] = &signal; // add a signal called TEST1, reference to signal
    test.Get( inputResult, additionals ); // readout signal list
-	ASSERT_STREQ( inputResult.c_str() , "TEST" ) << "result list must contains one signal called TEST" ;
+	ASSERT_STREQ( inputResult.c_str() , "TEST1" ) << "result list must contains one signal called TEST" ;
 
    // two signals
-   signalmap["TEST1"] = &signal; // add a signal called TEST, reference to signal
+   inputResult = "GET,2";
+   signalmap["TEST2"] = &signal; // add a signal called TEST2, reference to signal
    test.Get( inputResult, additionals ); // readout signal list
-	ASSERT_STREQ( inputResult.c_str() , "TEST,TEST1" ) << "result list must contains two signals called TEST and TEST1" ;
+	ASSERT_STREQ( inputResult.c_str() , "TEST2" ) << "result list must contains the second signal" ;
 }
 
 TEST_F( CHalTest, CHalUnitInputGetSimulationsStatus ) {
