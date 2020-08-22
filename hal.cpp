@@ -18,11 +18,11 @@ namespace siguni
                                       interface::CAdditionals & /*attAdditionals*/ )
    {
       attGetInput.clear();
+      attGetInput.append( "\n" ); 
       for(const auto & [key, ignored]  : signalMap ){
          attGetInput.append( key ); 
-         attGetInput.append( "," ); 
+         attGetInput.append( "\n" ); 
       }
-      attGetInput.pop_back(); // delete last character ","
    }
    
    // Get Simulation Status 
