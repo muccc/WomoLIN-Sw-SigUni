@@ -23,7 +23,9 @@ namespace siguni
 
       // read bytes to buffer 
       std::string buffer;
-      if ( 0 >= controlbus.ReadData( buffer ) )
+      if ( 0 >= controlbus.ReadData( buffer ) && 
+           0 == messageBuffer.size()
+         )
       {
           return false;
       }
