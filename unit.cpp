@@ -35,4 +35,21 @@ namespace siguni
    {
       unitInput.Get( attValue, attAdditionals );
    }
+
+   void CUnitInput::UpdateUnitSignalGetPressure( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+      unitInput.Get( attValue, attAdditionals );
+   }
+
+   void CUnitInput::UpdateUnitSignalGetTemperature( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+      unitInput.Get( attValue, attAdditionals );
+   }
+
+   void CUnitInput::UpdateUnitSignalGetHumidity( std::string & /*attKey*/, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+      unitInput.Get( attValue, attAdditionals );
+   }
+
+
 }

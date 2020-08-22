@@ -23,6 +23,7 @@ namespace siguni::interface
        void WriteErrorLog( std::string attIdentifier, std::string attErrorLog );
        [[nodiscard]] std::string ReadErrorLog(); 
 
+       // TODO use functions
        bool SimulationMode { false };      
 		 std::map<std::string_view, std::string> Settings;
 

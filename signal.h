@@ -74,5 +74,40 @@ namespace siguni
          void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
+   template class CSignalAddUnit<interface::ISignalGetPressure>;
+
+   class CSignalGetPressure final
+      : public CSignalAddUnit<interface::ISignalGetPressure>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetPressure() = default;
+         ~CSignalGetPressure() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetTemperature>;
+
+   class CSignalGetTemperature final
+      : public CSignalAddUnit<interface::ISignalGetTemperature>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetTemperature() = default;
+         ~CSignalGetTemperature() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetHumidity>;
+
+   class CSignalGetHumidity final
+      : public CSignalAddUnit<interface::ISignalGetHumidity>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetHumidity() = default;
+         ~CSignalGetHumidity() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
 
 }

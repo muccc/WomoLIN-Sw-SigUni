@@ -28,6 +28,9 @@ namespace siguni
       , public interface::ISignalSetReset
       , public interface::ISignalGetVersion
       , public interface::ISignalGetVoltage
+      , public interface::ISignalGetPressure
+      , public interface::ISignalGetTemperature
+      , public interface::ISignalGetHumidity
    {
       public:
 	     CUnitInput( interface::IUnitInput & attUnitInput) ;
@@ -38,6 +41,10 @@ namespace siguni
          void UpdateUnitSignalSetReset( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
          void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
          void UpdateUnitSignalGetVoltage( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+
+         void UpdateUnitSignalGetPressure( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetTemperature( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetHumidity( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
 
       private:
          interface::IUnitInput & unitInput;

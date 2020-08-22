@@ -53,6 +53,7 @@ std::string SendMessageAndReceiveResponse( CManager & manager, std::string messa
 
    // simulate received message for the manager
    manager.ControlbusMock.SetReadData( message );
+   manager.ControlbusMock.SetReadDataReturnValue( message.size() );
 
    // call a single process step from manager
    // the manager has to process the received message

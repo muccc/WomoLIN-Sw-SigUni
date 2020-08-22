@@ -63,14 +63,14 @@ TEST_F( CProtocolTest, ReadOneValidKeyValuePair ) {
 TEST_F( CProtocolTest, ReadTwoValidKeyValuePair ) {
 
    // data for first read process
-   std::string keyValuePair = "^SetSimulationModus;RESET$^GetSignals;GET$"; 
+   std::string keyValuePair = "^GetSignals;GET$^SetSimulationModus;RESET$"; 
 
    controlbus.SetReadData( keyValuePair );
    controlbus.SetReadDataReturnValue( keyValuePair.size() ); 
 
 	ASSERT_EQ( true, test.GetKeyValue( key, value ) );
-	ASSERT_STREQ( key.c_str() , "SetSimulationModus" );
-	ASSERT_STREQ( value.c_str() , "RESET" );
+	ASSERT_STREQ( key.c_str() , "GetSignals" );
+	ASSERT_STREQ( value.c_str() , "GET" );
 
    // no data for second read process
    keyValuePair = "";
@@ -80,8 +80,8 @@ TEST_F( CProtocolTest, ReadTwoValidKeyValuePair ) {
    // first read process must have read two key values
    // now we expect the second pair
 	ASSERT_EQ( true, test.GetKeyValue( key, value ) );
-	ASSERT_STREQ( key.c_str() , "GetSignals" );
-	ASSERT_STREQ( value.c_str() , "GET" );
+	ASSERT_STREQ( key.c_str() , "SetSimulationModus" );
+	ASSERT_STREQ( value.c_str() , "RESET" );
 }
 
 TEST_F( CProtocolTest, ReadValidKeyValuePairFragments ) {

@@ -16,6 +16,13 @@ namespace siguni::interface
 		 virtual void UpdateUnit( std::string & attKey, std::string & attValue, CAdditionals & attAdditionals ) = 0;
 	};
 
+	class ISignalGetString
+	{
+	  public:
+		 virtual ~ISignalGetString() = default;
+		 virtual void UpdateUnitSignalGetString( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
+	};
+
 	class ISignalSetReset
 	{
 	  public:
@@ -37,12 +44,27 @@ namespace siguni::interface
 		 virtual void UpdateUnitSignalGetVersion( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
 	};
 
-	class ISignalGetString
+	class ISignalGetPressure
 	{
 	  public:
-		 virtual ~ISignalGetString() = default;
-		 virtual void UpdateUnitSignalGetString( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
+		 virtual ~ISignalGetPressure() = default;
+		 virtual void UpdateUnitSignalGetPressure( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
 	};
+
+	class ISignalGetTemperature
+	{
+	  public:
+		 virtual ~ISignalGetTemperature() = default;
+		 virtual void UpdateUnitSignalGetTemperature( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
+	};
+
+	class ISignalGetHumidity
+	{
+	  public:
+		 virtual ~ISignalGetHumidity() = default;
+		 virtual void UpdateUnitSignalGetHumidity( std::string & attKey, std::string & attVersion, CAdditionals & attAdditionals ) = 0;
+	};
+
 
 }
 

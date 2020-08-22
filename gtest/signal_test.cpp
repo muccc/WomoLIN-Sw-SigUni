@@ -11,7 +11,7 @@
 namespace siguni::gtest
 {
 
-class CSerialTest  : public ::testing::Test { };
+class CSignalTest  : public ::testing::Test { };
 
 
 // Test add unit
@@ -23,7 +23,7 @@ public:
 	const std::vector<int*>* unitsPointer; // pointer to access unit array
 };
 
-TEST_F( CSerialTest, CSignalAddUnitInt ) {
+TEST_F( CSignalTest, CSignalAddUnitInt ) {
 
 	int val1 {1};
 	int val2 {2};
@@ -63,7 +63,7 @@ public:
 };
 
 
-TEST_F( CSerialTest, ISignalGetString) {
+TEST_F( CSignalTest, ISignalGetString) {
 
 	std::string key { "KEY" };
 	std::string val { "GET" };
@@ -96,7 +96,7 @@ public:
 };
 
 
-TEST_F( CSerialTest, ISignalSetReset ) {
+TEST_F( CSignalTest, ISignalSetReset ) {
 
 	std::string key { "KEY" };
 	std::string val { "GET" };
@@ -127,7 +127,7 @@ public:
 };
 
 
-TEST_F( CSerialTest, ISignalGetVoltage ) {
+TEST_F( CSignalTest, ISignalGetVoltage ) {
 
 	std::string key {"KEY"};
 	std::string voltage {"VOLTAGE"};
@@ -159,7 +159,7 @@ public:
 };
 
 
-TEST_F( CSerialTest, ISignalGetVersion ) {
+TEST_F( CSignalTest, ISignalGetVersion ) {
 
 	std::string key {"KEY"};
 	std::string fw {"FW"};
@@ -173,6 +173,101 @@ TEST_F( CSerialTest, ISignalGetVersion ) {
 	ASSERT_STREQ( test.fw.c_str() , "FW");
 
 }
+
+// Test Signal GetPressure
+class CSignalGetPressureTest : public interface::ISignalGetPressure
+{
+public:
+	CSignalGetPressureTest() = default ;
+	~CSignalGetPressureTest() = default;
+	void UpdateUnitSignalGetPressure( std::string & attKey, std::string & attPressure, interface::CAdditionals & /*attAdditionals*/ ) override final
+	{
+		key = attKey;
+		fw = attPressure;
+	};
+	std::string key;
+	std::string fw;
+};
+
+
+TEST_F( CSignalTest, ISignalGetPressure ) {
+
+	std::string key {"KEY"};
+	std::string fw {"FW"};
+
+	auto test = CSignalGetPressureTest();
+   auto additionals = interface::CAdditionals();
+
+	test.UpdateUnitSignalGetPressure( key, fw, additionals );
+
+	ASSERT_STREQ( test.key.c_str() , "KEY" );
+	ASSERT_STREQ( test.fw.c_str() , "FW");
+
+}
+
+// Test Signal GetTemperature
+class CSignalGetTemperatureTest : public interface::ISignalGetTemperature
+{
+public:
+	CSignalGetTemperatureTest() = default ;
+	~CSignalGetTemperatureTest() = default;
+	void UpdateUnitSignalGetTemperature( std::string & attKey, std::string & attTemperature, interface::CAdditionals & /*attAdditionals*/ ) override final
+	{
+		key = attKey;
+		fw = attTemperature;
+	};
+	std::string key;
+	std::string fw;
+};
+
+
+TEST_F( CSignalTest, ISignalGetTemperature ) {
+
+	std::string key {"KEY"};
+	std::string fw {"FW"};
+
+	auto test = CSignalGetTemperatureTest();
+   auto additionals = interface::CAdditionals();
+
+	test.UpdateUnitSignalGetTemperature( key, fw, additionals );
+
+	ASSERT_STREQ( test.key.c_str() , "KEY" );
+	ASSERT_STREQ( test.fw.c_str() , "FW");
+
+}
+
+// Test Signal GetHumidity
+class CSignalGetHumidityTest : public interface::ISignalGetHumidity
+{
+public:
+	CSignalGetHumidityTest() = default ;
+	~CSignalGetHumidityTest() = default;
+	void UpdateUnitSignalGetHumidity( std::string & attKey, std::string & attHumidity, interface::CAdditionals & /*attAdditionals*/ ) override final
+	{
+		key = attKey;
+		fw = attHumidity;
+	};
+	std::string key;
+	std::string fw;
+};
+
+
+TEST_F( CSignalTest, ISignalGetHumidity ) {
+
+	std::string key {"KEY"};
+	std::string fw {"FW"};
+
+	auto test = CSignalGetHumidityTest();
+   auto additionals = interface::CAdditionals();
+
+	test.UpdateUnitSignalGetHumidity( key, fw, additionals );
+
+	ASSERT_STREQ( test.key.c_str() , "KEY" );
+	ASSERT_STREQ( test.fw.c_str() , "FW");
+
+}
+
+
 
 
 }
