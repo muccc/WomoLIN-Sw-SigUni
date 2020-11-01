@@ -31,6 +31,12 @@ namespace siguni
       , public interface::ISignalGetPressure
       , public interface::ISignalGetTemperature
       , public interface::ISignalGetHumidity
+      , public interface::ISignalGetMagnetic
+      , public interface::ISignalGetAcceleration
+      , public interface::ISignalGetCurrent
+      , public interface::ISignalGetBatteryCapacity
+      , public interface::ISignalGetBatteryCharge
+      , public interface::ISignalGetBatteryHealth
    {
       public:
 	     CUnitInput( interface::IUnitInput & attUnitInput) ;
@@ -45,6 +51,14 @@ namespace siguni
          void UpdateUnitSignalGetPressure( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
          void UpdateUnitSignalGetTemperature( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
          void UpdateUnitSignalGetHumidity( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+
+         void UpdateUnitSignalGetMagnetic( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetAcceleration( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+
+         void UpdateUnitSignalGetCurrent( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetBatteryCapacity( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetBatteryCharge( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+         void UpdateUnitSignalGetBatteryHealth( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
 
       private:
          interface::IUnitInput & unitInput;
