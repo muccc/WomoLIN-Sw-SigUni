@@ -64,6 +64,45 @@ namespace siguni
 	   }
    }
 
+   void CSignalGetMagnetic::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetMagnetic( attKey, attValue, attAdditionals );
+	   }
+   }
 
+   void CSignalGetAcceleration::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetAcceleration( attKey, attValue, attAdditionals );
+	   }
+   }
 
+   void CSignalGetCurrent::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetCurrent( attKey, attValue, attAdditionals );
+	   }
+   }
+
+   void CSignalGetBatteryCapacity::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetBatteryCapacity( attKey, attValue, attAdditionals );
+	   }
+   }
+
+   void CSignalGetBatteryCharge::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetBatteryCharge( attKey, attValue, attAdditionals );
+	   }
+   }
+
+   void CSignalGetBatteryHealth::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ){
+		   unit->UpdateUnitSignalGetBatteryHealth( attKey, attValue, attAdditionals );
+	   }
+   }
 }

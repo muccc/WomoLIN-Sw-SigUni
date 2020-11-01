@@ -110,4 +110,76 @@ namespace siguni
          void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
+   template class CSignalAddUnit<interface::ISignalGetMagnetic>;
+
+   class CSignalGetMagnetic final
+      : public CSignalAddUnit<interface::ISignalGetMagnetic>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetMagnetic() = default;
+         ~CSignalGetMagnetic() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetAcceleration>;
+
+   class CSignalGetAcceleration final
+      : public CSignalAddUnit<interface::ISignalGetAcceleration>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetAcceleration() = default;
+         ~CSignalGetAcceleration() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetCurrent>;
+
+   class CSignalGetCurrent final
+      : public CSignalAddUnit<interface::ISignalGetCurrent>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetCurrent() = default;
+         ~CSignalGetCurrent() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetBatteryCapacity>;
+
+   class CSignalGetBatteryCapacity final
+      : public CSignalAddUnit<interface::ISignalGetBatteryCapacity>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetBatteryCapacity() = default;
+         ~CSignalGetBatteryCapacity() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetBatteryCharge>;
+
+   class CSignalGetBatteryCharge final
+      : public CSignalAddUnit<interface::ISignalGetBatteryCharge>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetBatteryCharge() = default;
+         ~CSignalGetBatteryCharge() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
+   template class CSignalAddUnit<interface::ISignalGetBatteryHealth>;
+
+   class CSignalGetBatteryHealth final
+      : public CSignalAddUnit<interface::ISignalGetBatteryHealth>
+      , public interface::ISignal
+   {
+      public:
+         CSignalGetBatteryHealth() = default;
+         ~CSignalGetBatteryHealth() = default;
+         void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+   };
+
 }
