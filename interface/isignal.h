@@ -107,5 +107,12 @@ namespace siguni::interface
        virtual void UpdateUnitSignalGetBatteryHealth( std::string & attKey, std::string & attValue, CAdditionals & attAdditionals ) = 0;
    };
 
+   class ISignalGetVictronInfo
+   {
+	public:
+	  virtual ~ISignalGetVictronInfo() = default;
+	  virtual void UpdateUnitSignalGetVictronInfo( std::string & attKey, std::string & attValue, CAdditionals & attAdditionals ) = 0;
+	};
+
 }
 
