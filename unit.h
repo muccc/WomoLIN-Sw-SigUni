@@ -37,6 +37,7 @@ namespace siguni
       , public interface::ISignalGetBatteryCapacity
       , public interface::ISignalGetBatteryCharge
       , public interface::ISignalGetBatteryHealth
+	  , public interface::ISignalGetVictronInfo
    {
       public:
 	     CUnitInput( interface::IUnitInput & attUnitInput) ;
@@ -59,6 +60,8 @@ namespace siguni
          void UpdateUnitSignalGetBatteryCapacity( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
          void UpdateUnitSignalGetBatteryCharge( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
          void UpdateUnitSignalGetBatteryHealth( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
+
+         void UpdateUnitSignalGetVictronInfo( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals  ) override final;
 
       private:
          interface::IUnitInput & unitInput;

@@ -86,5 +86,9 @@ namespace siguni
       unitInput.Get( attValue, attAdditionals );
    }
 
+   void CUnitInput::UpdateUnitSignalGetVictronInfo( [[maybe_unused]] std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+         unitInput.Get( attValue, attAdditionals );
+   }
 
 }

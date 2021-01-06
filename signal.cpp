@@ -105,4 +105,11 @@ namespace siguni
 		   unit->UpdateUnitSignalGetBatteryHealth( attKey, attValue, attAdditionals );
 	   }
    }
+
+   void CSignalGetVictronInfo::UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals )
+   {
+	   for( const auto & unit : units ) {
+		   unit->UpdateUnitSignalGetVictronInfo( attKey, attValue, attAdditionals );
+	   }
+	}
 }

@@ -182,4 +182,16 @@ namespace siguni
          void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
    };
 
+   template class CSignalAddUnit<interface::ISignalGetVictronInfo>;
+
+	class CSignalGetVictronInfo final
+	 : public CSignalAddUnit<interface::ISignalGetVictronInfo>
+	 , public interface::ISignal
+	{
+	 public:
+		CSignalGetVictronInfo() = default;
+		~CSignalGetVictronInfo() = default;
+		void UpdateUnit( std::string & attKey, std::string & attValue, interface::CAdditionals & attAdditionals ) override final;
+	};
+
 }
